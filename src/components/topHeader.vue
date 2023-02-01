@@ -127,7 +127,7 @@
     </div>
     <!-- 导航E -->
   </div>
-  <loginDialog :loginShow="loginShow"></loginDialog>
+  <loginDialog :loginShow="loginShow" @update="loginShow=$event"></loginDialog>
 </template>
 
 <script setup>
