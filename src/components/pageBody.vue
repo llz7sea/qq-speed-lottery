@@ -213,7 +213,7 @@
           <p>6、由于篇幅限制，本活动概率公示将会在新闻概率公示页面中发布。<a
               href="javascript:location.href='https://speed.qq.com/webplat/info/news_version3/147/534/552/553/m15538/201801/684484.shtml';"
               onclick="PTTSendClick('btn','btn_look','点击查看')">点击查看</a></p>
-          <p>7、关于“永久”的定义，请见<a href="javascript:';" onclick="PTTSendClick('btn','btn_txxy','《腾讯游戏许可及服务协议》')">《腾讯游戏许可及服务协议》</a>第4.8条。
+          <p>7、关于“永久”的定义，请见<a href="javascript:" onclick="PTTSendClick('btn','btn_txxy','《腾讯游戏许可及服务协议》')">《腾讯游戏许可及服务协议》</a>第4.8条。
           </p>
         </div>
       </div>
@@ -237,83 +237,6 @@ $(document).ready(function () {
     });
   });
 });
-
-
-//开始抽奖lottery->js
-function callJsToStart() {
-  lottery.disable();
-  drawLottery();
-}
-
-//开发获得抽奖结果 通知lottery开始播放效果 js->lottery
-function calllotteryToRoll(id) {
-  if (lottery) lottery.stopRoll(id);
-}
-
-//动画完成通知js lottery->js
-function callJsToComplete() {
-  TGDialogS('pop8');
-  amsSubmit(530476, 923080);
-  //alert('恭喜你获得大奖哟！！');
-}
-
-//初始化抽奖的 可以不知道内部
-var lottery = new Lottery({
-  'lighturl': '',//外部光圈png 不填写就用默认的效果
-  'starturl': '', //外部按钮png 不填写就用默认的按钮效果
-  'width': 793,//lottery 宽度
-  'height': 720,//lottery 高度
-  'total': 8,//抽奖产品的总数
-  'sbtnx': 256,// 开始抽奖按钮的位置x坐标
-  'sbtny': 232,// 开始抽奖按钮的位置y坐标
-  'sbtnw': 255,// 开始抽奖按钮的宽度
-  'sbtnh': 255,// 开始抽奖按钮的高度
-  'boxw': 201,// 奖品光效的宽度
-  'boxh': 202,//奖品光效的高度
-  'position': "179_0,406_0,592_142,592_378,406_518,179_518,0_358,0_142",
-  //奖品光效的位置，对应奖品图片的布局，填入每个奖品的位置以及角度用逗号分割 x_y 例如19_20或者19_20_0 表示第一个奖品的位置 x坐标为19px y坐标为20px 角度为0。）
-  'contentId': 'lotterycontent',//嵌入lottery 的div层的 id
-  'onClickRollEvent': callJsToStart,//对应上面接口
-  'onCompleteRollEvent': callJsToComplete //对应上面接口
-});
-
-//弹窗加载-遮罩
-function TGDialogS(e) {
-  need("biz.dialog", function (Dialog) {
-    Dialog.show({
-      id: e,
-      bgcolor: '#000', //弹出“遮罩”的颜色，格式为"#FF6600"，可修改，默认为"#fff"
-      opacity: 50 //弹出“遮罩”的透明度，格式为｛10-100｝，可选
-    });
-  });
-}
-
-function closeDialog() {
-  // 利用milo库引入dialog组件
-  need("biz.dialog", function (Dialog) {
-    Dialog.hide();
-  });
-}
-
-//获奖浮层
-function showRecord() {
-  var oLi = $('.user_links li');
-  oLi.hover(
-      function () {
-
-        if ($(this).find('#my_record_box').length > 0) {
-          $('#my_record_box').css('display', 'block')
-        }
-        ;
-      },
-      function () {
-        $('#my_record_box').css('display', 'none')
-      }
-  )
-
-}
-
-showRecord();
 </script>
 
 <style scoped>

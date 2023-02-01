@@ -14,7 +14,16 @@ import mianPage from "@/views/mianPage";
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
+a:hover {
+  text-decoration: none;
+  animation: Light 0s linear both;
+}
 </style>

@@ -3,10 +3,9 @@
 * @Date:   2017-05-25 17:06:20
 * @Last Modified time: 2018-07-04 17:10:34
 */
-function Lottery(option) {
-    var _public = this;
+export function Lottery(option) {
+    // var _public = this;
     var _static = {};
-
     var _private = {
         /**
          * 添加样式规则
@@ -34,16 +33,16 @@ function Lottery(option) {
             }
             pos = pos || 0;
 
-            function getTag(tagName, oParent) {
-                return (oParent || document).getElementsByTagName(tagName);
-            }
+            // function getTag(tagName, oParent) {
+            //     return (oParent || document).getElementsByTagName(tagName);
+            // }
 
-            function getClass(className, element, tagName) {
-                var i = 0, aClass = [], reClass = new RegExp("(^|\\s)" + className + "(\\s|$)"),
-                    aElement = getTag(tagName || "*", element || document);
-                for (i = 0; i < aElement.length; i++) reClass.test(aElement[i].className) && aClass.push(aElement[i]);
-                return aClass;
-            }
+            // function getClass(className, element, tagName) {
+            //     var i = 0, aClass = [], reClass = new RegExp("(^|\\s)" + className + "(\\s|$)"),
+            //         aElement = getTag(tagName || "*", element || document);
+            //     for (i = 0; i < aElement.length; i++) reClass.test(aElement[i].className) && aClass.push(aElement[i]);
+            //     return aClass;
+            // }
 
 
             if ('insertRule' in sheet) {
@@ -53,9 +52,9 @@ function Lottery(option) {
             } else {
                 //////console.log(selector);
 
-                if (!/\@keyframes/.test(selector)) {
-                    sheet.addRule(selector, text, pos);
-                }
+                // if (!/\@keyframes/.test(selector)) {
+                //     sheet.addRule(selector, text, pos);
+                // }
             }
         },
         myBrowser: function () {
@@ -63,12 +62,12 @@ function Lottery(option) {
             var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
             var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
             var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
-            var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
+            // var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
             if (userAgent.indexOf("Edge") > -1) {
                 return "edge";
             }
             if (isIE) {
-                var IE5 = IE55 = IE6 = IE7 = IE8 = false;
+                var IE55,IE6,IE7,IE8,IE9 = false;
                 var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
                 reIE.test(userAgent);
                 var fIEVersion = parseFloat(RegExp["$1"]);
@@ -105,7 +104,7 @@ function Lottery(option) {
             return /iphone|ios|android|mini|mobile|mobi|Nokia|Symbian|iPod|iPad|Windows\s+Phone|MQQBrowser|wp7|wp8|UCBrowser7|UCWEB|360\s+Aphone\s+Browser|blackberry/i.test(navigator.userAgent);
         },
         lotteryZoom: function (obj, zoom) {
-            for (items in obj) {
+            for (let items in obj) {
                 if (typeof obj[items] == "number" && items != "total") {
                     obj[items] = obj[items] * zoom;
                 } else if (items == "position") {
@@ -134,12 +133,12 @@ function Lottery(option) {
                 return obj;
             }
             var style = getStyle(document.createElement('div'), null);
-            var map = {
-                '-webkit-': 'webkit',
-                '-moz-': 'Moz',
-                '-ms-': 'ms',
-                '-o-': 'O'
-            }
+            // var map = {
+            //     '-webkit-': 'webkit',
+            //     '-moz-': 'Moz',
+            //     '-ms-': 'ms',
+            //     '-o-': 'O'
+            // }
             for (var k in style) {
                 theCSSPrefix = (k.match(rxPrefixes) || (+k == k && style[k].match(rxPrefixes)));
                 if (theCSSPrefix) {
@@ -213,8 +212,7 @@ function Lottery(option) {
         }
     }
 
-
-    var _static = this.constructor;
+    // var _static = this.constructor;
     // 插件默认配置
     _static.config = {
         'lighturl': '//ossweb-img.qq.com/images/js/delottery/sel.png',//外部光圈png  不填写就用默认的效果
@@ -252,9 +250,7 @@ function Lottery(option) {
     _private.prefix = _private.detectCSSPrefix().css;
     var myBrowser = _private.myBrowser();
 
-
     var _self = this;
-
 
     function cloneObj(oldObj) { //复制对象方法
         if (typeof (oldObj) != 'object') return oldObj;
@@ -263,7 +259,7 @@ function Lottery(option) {
         for (var i in oldObj)
             newObj[i] = cloneObj(oldObj[i]);
         return newObj;
-    };
+    }
 
     function extendObj() { //扩展对象
         var args = arguments;
@@ -307,7 +303,7 @@ function Lottery(option) {
     // container.style = "position:relative; left:0; top:0; z-index:2;"
 
     //初始化class*/
-    var classInit = (function () {
+    this.classInit = (function () {
 
         //抽奖容器的class初始化
         _private.addRule('.' + classes['container'], {
@@ -364,7 +360,7 @@ function Lottery(option) {
             }
 
             //抽奖按钮的class初始化
-            var startBtn = {
+            let startBtn = {
                 position: 'absolute',
                 width: config.sbtnw + 'px',
                 height: config.sbtnh + 'px',
@@ -382,7 +378,7 @@ function Lottery(option) {
             _private.addRule('.' + classes['start'], start)
 
             //不可点击状态的抽奖按钮class初始化
-            var disableBtn = extendObj(startBtn, {cursor: 'normal', background: 'rgba(0,0,0,.5)'});
+            let disableBtn = extendObj(startBtn, {cursor: 'normal', background: 'rgba(0,0,0,.5)'});
 
             _private.addRule('.' + classes['disable'], disableBtn)
             _private.addRule('.' + classes['disable'] + ' .' + classes['slight'], {
@@ -412,7 +408,7 @@ function Lottery(option) {
         }
     })();
     //界面初始化
-    var faceInit = (function () {
+    this.faceInit = (function () {
         var str
         if (config.r) {
             str = '<div id="swf' + classes['container'] +
@@ -453,7 +449,7 @@ function Lottery(option) {
         }
     }
 
-    var bind = (function () {
+    this.bind = (function () {
 
 
         ////////console.log(startBtn);
@@ -489,7 +485,7 @@ function Lottery(option) {
     })();
     //处理步骤
     var step = [];
-    var parseStep = (function () {
+    this.parseStep = (function () {
         if (config.r) {
             var each = 360 / config.r;
             for (var i = 0; i < config.r; i++) {
@@ -498,7 +494,7 @@ function Lottery(option) {
         } else {
             var arr = config.position.split(',');
 
-            for (var i = 0; i < arr.length; i++) {
+            for (let i = 0; i < arr.length; i++) {
                 var pos = arr[i].split('_');
                 step.push({
                     left: pos[0],
@@ -520,6 +516,7 @@ function Lottery(option) {
     }
 
     var fastTime = 30, slowTime = 300, rdis = 8;
+    rdis
     this.reset = function () {
         btn.enable();
         moveBox.style.cssText = '';

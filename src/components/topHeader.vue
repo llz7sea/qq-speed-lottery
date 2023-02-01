@@ -3,8 +3,10 @@
     <ul class="ost_b">
       <li class="ost_tg ost_bg"><a href="//game.qq.com" target="_blank" class="ost_blnk"
                                    onclick="pgvSendClick({hottag:'act.title.logo'});">腾讯游戏</a></li>
-      <li class="ost_gg ost_bg"><a href="http://speed.qq.com/" id="ost_gg" target="_blank" class="ost_blnk"
-                                   onclick="pgvSendClick({hottag:'act.title.index'});">精彩活动</a></li>
+      <li class="ost_gg ost_bg">
+        <a href="http://speed.qq.com/" id="ost_gg" target="_blank" class="ost_blnk"
+           onclick="pgvSendClick({hottag:'act.title.index'});">精彩活动</a>
+      </li>
       <li class="ost_i"><p class="ost_t ost_bg"><a href="//speed.qq.com/main.shtml" target="_blank" class="ost_lnk"
                                                    onclick="pgvSendClick({hottag:'act.title.back'});">返回官网首页</a></p>
         <p class="ost_gl">
@@ -25,8 +27,12 @@
     <div class="act_comm_box blue_act_comm_box">
       <!-- 左侧链接Start -->
       <div class="acb_links">
-        <a href="//speed.qq.com/web201008/download.shtml" title="下载QQ飞车客户端" class="acb_big_btn acb_top_ico"
-           target="_blank"><i class="acb_top_ico acb_down_ico "></i>下载游戏</a>
+        <a href="//speed.qq.com/web201008/download.shtml"
+           title="下载QQ飞车客户端"
+           class="acb_big_btn acb_top_ico"
+           target="_blank">
+          <i class="acb_top_ico acb_down_ico"></i>下载游戏
+        </a>
         <a href="//speed.qq.com/" title="QQ飞车官方网站" class="acb_big_btn acb_top_ico" target="_blank"><i
             class="acb_top_ico acb_home_ico "></i>官方网站</a>
         <a href="javascript:share('qqzone')" title="分享到Qzone" class="acb_qq_btn acb_top_ico"></a>
@@ -35,19 +41,31 @@
       <!-- 左侧链接Start -->
       <div class="acb_user">
         <ul class="user_links">
-          <li id="spanNotBind_923027"><a href="javascript:amsInit(530476, 923026);" title="绑定大区" class="l">绑定大区</a><i
-              class="c"></i></li>
-          <li id="spanBind_923027" style="display:none">所绑大区：<span id="area_info_923027"></span> 角色：<span
-              id="role_info_923027"></span><a href="javascript:amsInit(530476, 923026);">更改绑定</a></li>
-          <li><a href="javascript:amsSubmit(530476,923048);" title="查看我的奖励" class="l">查看我的奖励</a></li>
+          <li id="spanNotBind_923027">
+            <a title="绑定大区" class="l">绑定大区</a>
+            <i class="c"></i>
+          </li>
+          <li id="spanBind_923027" style="display:none">
+            所绑大区：
+            <span id="area_info_923027"></span>
+            角色：
+            <span id="role_info_923027"></span>
+            <a>更改绑定</a>
+          </li>
+          <li>
+            <a title="查看我的奖励" class="l">查看我的奖励</a>
+          </li>
         </ul>
         <!-- 用户登录模块Start -->
         <div class="user_login">
-          <span id="unlogin" style="display: block;">亲爱的用户，请<a href="javascript:;" id="dologin"
-                                                               class="acb_log_btn acb_top_ico">登录</a></span>
-          <span id="logined" style="display:none">欢迎您，<span id="login_qq_span"></span>，<a href="javascript:;"
-                                                                                          id="dologout"
-                                                                                          class="acb_log_btn acb_top_ico">注销</a></span>
+          <span id="unlogin" style="display: block;">
+            亲爱的用户，请<a id="dologin" class="acb_log_btn acb_top_ico" @click="checkLogin">登录</a>
+          </span>
+          <span id="logined" style="display:none">
+            欢迎您，
+            <span id="login_qq_span"></span>，
+            <a href="javascript:;" id="dologout" class="acb_log_btn acb_top_ico">注销</a>
+          </span>
         </div>
       </div>
       <!-- 用户登录模块END -->
@@ -109,10 +127,19 @@
     </div>
     <!-- 导航E -->
   </div>
+  <loginDialog :loginShow="loginShow"></loginDialog>
 </template>
 
 <script setup>
+import {ref} from "vue";
+import loginDialog  from "@/components/loginDialog.vue"
+
+const loginShow = ref(false)
+const checkLogin = ()=>{
+  loginShow.value = true
+}
 </script>
+
 <style scoped>
 .ost {
   width: 100%;
@@ -193,6 +220,10 @@
 .ost_ldc {
   border-right: 1px solid #BFC6D7;
   padding: 0 9px;
+}
+
+.ost_lnk:hover {
+  color: #0096D0 !important;
 }
 
 /* ===== reset ===== */
@@ -530,39 +561,6 @@
   -moz-animation: fadeInLeft .5s ease both;
 }
 
-@-webkit-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-3px)
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(0)
-  }
-}
-
-@-moz-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -moz-transform: translateX(-3px)
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: translateX(0)
-  }
-}
-
-@-ms-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -ms-transform: translateX(-3px)
-  }
-  100% {
-    opacity: 1;
-    -ms-transform: translateX(0)
-  }
-}
-
 .user_links a:hover, .user_links a {
   -webkit-transition: .2s ease-in;
   -moz-transition: .2s ease-in;
@@ -579,40 +577,190 @@
 #comm_act_wrap, .ost, .speed_comm_top {
   min-width: 1300px !important;
 }
-/* 导航 */
-.speed_comm_top{font:12px/1.5 '\5FAE\8F6F\96C5\9ED1';height:90px;z-index:9999;width:100%}
-.speed_comm_top a{text-decoration:none}
 
-#comm_act_wrap{height:44px;background-color:#515151}
-.act_top_nav{background-color:#0e0e0e;height:90px;width:100%;z-index:99}
-.act_nav_con{width:1000px;height:90px;margin:0 auto;position:relative}
-.act_nav_logo{background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -167px;width:100px;height:74px;position:absolute;left:-138px;top:6px;}
-.act_top_btn{width:126px;position:absolute;right:-140px;top:0;height:80px;padding-top:10px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line1.jpg) no-repeat left top;padding-left:25px;}
-.act_top_btn a{width:126px;height:31px;font-size:18px;color:#fff;line-height:31px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -95px;display:block;position:relative;margin-bottom:7px;}
-.act_top_btn a:hover{background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -131px;color:#ff5a00;}
-.top_icon1{width:18px;height:17px;position:absolute;left:13px;top:7px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -147px -101px;}
-.act_top_btn a:hover .top_icon1{background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -147px -138px;}
-.top_icon2{width:15px;height:15px;position:absolute;left:16px;top:9px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -129px -103px;}
-.act_top_btn a:hover .top_icon2{background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -129px -140px;}
-.act_top_btn a:hover .top_icon1,.top_btn a:hover .top_icon2{-webkit-animation:fadeInDown .8s ease both;-moz-animation:fadeInDown .8s ease both;-ms-animation:fadeInDown .8s ease both;-o-animation:fadeInDown .8s ease both;}
-@-webkit-keyframes fadeInDown{0%{opacity:.2;-webkit-transform:translateY(-3px)}100%{opacity:1;-webkit-transform:translateY(0)}}
-@-moz-keyframes fadeInDown{0%{opacity:.2;-moz-transform:translateY(-3px)}100%{opacity:1;-moz-transform:translateY(0)}}
-@-ms-keyframes fadeInDown{0%{opacity:.2;-ms-transform:translateY(-3px)}100%{opacity:1;-ms-transform:translateY(0)}}
-@-o-keyframes fadeInDown{0%{opacity:.2;-o-transform:translateY(-3px)}100%{opacity:1;-o-transform:translateY(0)}}
-.act_top_btn a:hover span{-webkit-animation:fadeInRight .8s ease both;-moz-animation:fadeInRight .8s ease both;-ms-animation:fadeInRight .8s ease both;-o-animation:fadeInRight .8s ease both;}
-@-webkit-keyframes fadeInRight{0%{opacity:.2;-webkit-transform:translateX(5px)}100%{opacity:1;-webkit-transform:translateX(0)}}
-@-moz-keyframes fadeInRight{0%{opacity:.2;-moz-transform:translateX(5px)}100%{opacity:1;-moz-transform:translateX(0)}}
-@-ms-keyframes fadeInRight{0%{opacity:.2;-ms-transform:translateX(5px)}100%{opacity:1;-ms-transform:translateX(0)}}
-@-o-keyframes fadeInRight{0%{opacity:.2;-o-transform:translateX(5px)}100%{opacity:1;-o-transform:translateX(0)}}
-.act_top_btn a span{position:absolute;left:39px;top:0;height:31px;}
-.act_nav_list{height:90px}
-.act_nav_list a{position:relative;float:left;width:165px;height:90px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line1.jpg) no-repeat left top;text-align:center;}
-.act_nav_list a:hover{background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/btn.gif) no-repeat;text-decoration:none;}
-.act_nav_list a strong{color:#fff;font-weight:bold;font-size:18px;padding-top:15px;display:block;line-height:35px;}
-.act_nav_list a span{font-size:13px;color:#fff;line-height:22px;display:block;}
-.act_nav_list a:hover strong{padding-top:10px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line2.png) no-repeat 50% bottom;text-shadow:#df3c00 0 1px 1px;-webkit-animation:fadeInDown .6s ease both;-moz-animation:fadeInDown .6s ease both;-ms-animation:fadeInDown .6s ease both;-o-animation:fadeInDown .6s ease both;}
-.act_nav_list a:hover span{text-shadow:#df3c00 0 1px 1px;-webkit-animation:fadeInDown .6s .2s ease both;-moz-animation:fadeInDown .6s .2s ease both;-ms-animation:fadeInDown .6s .2s ease both;-o-animation:fadeInDown .6s .2s ease both;}
-.act_nav_icon{width:18px;height:21px;position:absolute;left:73px;top:66px;background:url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -137px -183px;display:none;-webkit-animation:fadeInDown .6s .3s ease both;-moz-animation:fadeInDown .6s .3s ease both;-ms-animation:fadeInDown .6s .3s ease both;-o-animation:fadeInDown .6s .3s ease both;}
-.act_nav_list a:hover .act_nav_icon{display:block}
+/* 导航 */
+.speed_comm_top {
+  font: 12px/1.5 '\5FAE\8F6F\96C5\9ED1';
+  height: 90px;
+  z-index: 9999;
+  width: 100%
+}
+
+.speed_comm_top a {
+  text-decoration: none
+}
+
+#comm_act_wrap {
+  height: 44px;
+  background-color: #515151
+}
+
+.act_top_nav {
+  background-color: #0e0e0e;
+  height: 90px;
+  width: 100%;
+  z-index: 99
+}
+
+.act_nav_con {
+  width: 1000px;
+  height: 90px;
+  margin: 0 auto;
+  position: relative
+}
+
+.act_nav_logo {
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -167px;
+  width: 100px;
+  height: 74px;
+  position: absolute;
+  left: -138px;
+  top: 6px;
+}
+
+.act_top_btn {
+  width: 126px;
+  position: absolute;
+  right: -140px;
+  top: 0;
+  height: 80px;
+  padding-top: 10px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line1.jpg) no-repeat left top;
+  padding-left: 25px;
+}
+
+.act_top_btn a {
+  width: 126px;
+  height: 31px;
+  font-size: 18px;
+  color: #fff;
+  line-height: 31px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -95px;
+  display: block;
+  position: relative;
+  margin-bottom: 7px;
+}
+
+.act_top_btn a:hover {
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat 0 -131px;
+  color: #ff5a00;
+}
+
+.top_icon1 {
+  width: 18px;
+  height: 17px;
+  position: absolute;
+  left: 13px;
+  top: 7px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -147px -101px;
+}
+
+.act_top_btn a:hover .top_icon1 {
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -147px -138px;
+}
+
+.top_icon2 {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 16px;
+  top: 9px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -129px -103px;
+}
+
+.act_top_btn a:hover .top_icon2 {
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -129px -140px;
+}
+
+.act_top_btn a:hover .top_icon1, .top_btn a:hover .top_icon2 {
+  -webkit-animation: fadeInDown .8s ease both;
+  -moz-animation: fadeInDown .8s ease both;
+  -ms-animation: fadeInDown .8s ease both;
+  -o-animation: fadeInDown .8s ease both;
+}
+
+.act_top_btn a:hover span {
+  -webkit-animation: fadeInRight .8s ease both;
+  -moz-animation: fadeInRight .8s ease both;
+  -ms-animation: fadeInRight .8s ease both;
+  -o-animation: fadeInRight .8s ease both;
+}
+
+.act_top_btn a span {
+  position: absolute;
+  left: 39px;
+  top: 0;
+  height: 31px;
+}
+
+.act_nav_list {
+  height: 90px
+}
+
+.act_nav_list a {
+  position: relative;
+  float: left;
+  width: 165px;
+  height: 90px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line1.jpg) no-repeat left top;
+  text-align: center;
+}
+
+.act_nav_list a:hover {
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/btn.gif) no-repeat;
+  text-decoration: none;
+}
+
+.act_nav_list a strong {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 15px;
+  display: block;
+  line-height: 35px;
+}
+
+.act_nav_list a span {
+  font-size: 13px;
+  color: #fff;
+  line-height: 22px;
+  display: block;
+}
+
+.act_nav_list a:hover strong {
+  padding-top: 10px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/line2.png) no-repeat 50% bottom;
+  text-shadow: #df3c00 0 1px 1px;
+  -webkit-animation: fadeInDown .6s ease both;
+  -moz-animation: fadeInDown .6s ease both;
+  -ms-animation: fadeInDown .6s ease both;
+  -o-animation: fadeInDown .6s ease both;
+}
+
+.act_nav_list a:hover span {
+  text-shadow: #df3c00 0 1px 1px;
+  -webkit-animation: fadeInDown .6s .2s ease both;
+  -moz-animation: fadeInDown .6s .2s ease both;
+  -ms-animation: fadeInDown .6s .2s ease both;
+  -o-animation: fadeInDown .6s .2s ease both;
+}
+
+.act_nav_icon {
+  width: 18px;
+  height: 21px;
+  position: absolute;
+  left: 73px;
+  top: 66px;
+  background: url(//game.gtimg.cn/images/speed/act/a20171114top_nav/nav_sp.png) no-repeat -137px -183px;
+  display: none;
+  -webkit-animation: fadeInDown .6s .3s ease both;
+  -moz-animation: fadeInDown .6s .3s ease both;
+  -ms-animation: fadeInDown .6s .3s ease both;
+  -o-animation: fadeInDown .6s .3s ease both;
+}
+
+.act_nav_list a:hover .act_nav_icon {
+  display: block
+}
 /* 导航结束 */
 </style>
