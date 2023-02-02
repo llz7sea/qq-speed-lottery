@@ -5,10 +5,18 @@
         <h1 class="hide">极品狂欢夜</h1>
         <p class="txt_head">活动时间：2023.1.28-2023.3.19</p>
         <div class="head_btn">
-          <a href="javascript:check1();" class="sp db btn_buy2"
-             onclick="PTTSendClick('btn','btn_buy2','2Q币购买')">2Q币购买</a>
-          <a href="javascript:check2();" class="sp db btn_buy20" onclick="PTTSendClick('btn','btn_buy20','20Q币购买')">20Q币购买</a>
-          <a href="javascript:check3();" class="sp db btn_buy100" onclick="PTTSendClick('btn','btn_buy100','100Q币购买')">100Q币购买</a>
+          <a
+              class="sp db btn_buy2"
+              @click="purchase(2)"
+          >2Q币购买</a>
+          <a
+              class="sp db btn_buy20"
+              @click="purchase(2)"
+          >20Q币购买</a>
+          <a
+              class="sp db btn_buy100"
+              @click="purchase(2)"
+          >100Q币购买</a>
         </div>
       </div>
       <div class="content">
@@ -127,11 +135,20 @@
             <p>每当重复点亮已点亮的赛车勋章时，均会获得车王的祝福，每当祝福值达到满值时，下次打开宝盒必定能随机点亮一个未被点亮<br>的赛车勋章。每次点亮未点亮的赛车勋章时，祝福值会被清空。</p>
           </div>
           <div class="box_s1_btn">
-            <a href="javascript:openOne();" class="sp db btn_open1"
-               onclick="PTTSendClick('btn','btn_open1','打开1')">打开1</a>
-            <a href="javascript:openTen();" class="sp db btn_open10" onclick="PTTSendClick('btn','btn_open10','打开10')">打开10</a>
-            <!-- <a href="javascript:TGDialogS('pop10');" class="sp db btn_zc"onclick="PTTSendClick('btn','btn_zc','暂存')">暂存</a> -->
-            <a href="javascript:openBox();" class="sp db btn_zc" onclick="PTTSendClick('btn','btn_zc','暂存')">暂存</a>
+            <a
+                @click="openCase(1)"
+                class="sp db btn_open1"
+                onclick="PTTSendClick('btn','btn_open1','打开1')"
+            >打开1</a>
+            <a
+                @click="openCase(10)"
+                class="sp db btn_open10"
+                onclick="PTTSendClick('btn','btn_open10','打开10')"
+            >打开10</a>
+            <a
+                @click="openRepository"
+                class="sp db btn_zc"
+                onclick="PTTSendClick('btn','btn_zc','暂存')">暂存</a>
           </div>
           <p class="txt_s1_num">剩余的勋章宝盒数量：<span id="medalNum">0</span></p>
         </div>
@@ -190,7 +207,10 @@
                 <i></i>
               </li>
             </ul>
-            <a href="javascript:;" class="pa btn_cj" onclick="PTTSendClick('btn','btn_cj','抽奖')">
+            <a href="javascript:;"
+               class="pa btn_cj"
+               @click="rollDish"
+            >
               <p>剩余的次数:<span id="residueNum">0</span></p>
             </a>
             <div id="swflotterycontent_container" class="lotterycontent_container"><a hidefocus="true"
@@ -213,16 +233,24 @@
           <p>6、由于篇幅限制，本活动概率公示将会在新闻概率公示页面中发布。<a
               href="javascript:location.href='https://speed.qq.com/webplat/info/news_version3/147/534/552/553/m15538/201801/684484.shtml';"
               onclick="PTTSendClick('btn','btn_look','点击查看')">点击查看</a></p>
-          <p>7、关于“永久”的定义，请见<a href="javascript:" onclick="PTTSendClick('btn','btn_txxy','《腾讯游戏许可及服务协议》')">《腾讯游戏许可及服务协议》</a>第4.8条。
+          <p>7、关于“永久”的定义，请见<a href="javascript:"
+                              onclick="PTTSendClick('btn','btn_txxy','《腾讯游戏许可及服务协议》')">《腾讯游戏许可及服务协议》</a>第4.8条。
           </p>
         </div>
       </div>
     </div>
   </div>
+  <loginDialog :loginShow="loginShow" @update="finishLogin"></loginDialog>
+  <regionBindDialog :bindShow="bindShow" @update="bindShow=$event"></regionBindDialog>
 </template>
 
 <script setup>
 import $ from 'jquery'
+import {ref} from "vue";
+import loginDialog from "@/components/dialog/loginDialog.vue"
+import regionBindDialog from "@/components/dialog/regionBindDialog.vue"
+import {callShade} from "@/utils/shadeControler";
+import {useStore} from "vuex";
 
 $(document).ready(function () {
   var a, c;
@@ -237,6 +265,48 @@ $(document).ready(function () {
     });
   });
 });
+
+const store = useStore()
+const loginShow = ref(false)
+const bindShow = ref(false)
+const checkLogin = () => {
+  if (!store.state.logined) {
+    callShade('white')
+    setTimeout(() => {
+      loginShow.value = true
+    }, 100)
+  }
+}
+const bindRegion = () => {
+  if (store.state.logined) {
+    setTimeout(() => {
+      bindShow.value = true
+      callShade('white')
+    }, 100)
+  } else {
+    checkLogin()
+  }
+}
+const finishLogin = () => {
+  loginShow.value = false
+  if (!store.state.bound && store.state.logined) {
+    bindRegion()
+  }
+}
+const purchase = m => {
+  checkLogin()
+  console.log(m)
+}
+const openCase = q => {
+  checkLogin()
+  console.log(q)
+}
+const openRepository = () => {
+  checkLogin()
+}
+const rollDish = () => {
+  checkLogin()
+}
 </script>
 
 <style scoped>
