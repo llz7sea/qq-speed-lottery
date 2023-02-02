@@ -1,18 +1,18 @@
 <template>
   <Teleport v-if="loginShow" to="body">
-    <div id="_overlay_">
-    </div>
     <div class="loginDiv">
       <div class="login" id="login" style="height: 366px;">
         <div class="header">
           <a class="close" id="close" title="关闭" tabindex="14" @click="handleClose"></a>
         </div>
-        <div class="error_tips" id="error_tips" style="display: none;"><span class="error_logo" id="error_logo"></span>
-          <span class="err_m" id="err_m"></span></div>
-        <div class="loading_tips" id="loading_tips" v-show="loginLoding"><span id="loading_wording">登录中</span><img id="loading_img"
-                                                                                              place_src="https://ui.ptlogin2.qq.com/style/0/images/load.gif"
-                                                                                              align="absmiddle"
-                                                                                              src="https://ui.ptlogin2.qq.com/style/0/images/load.gif">
+        <div class="error_tips" id="error_tips" v-show="errorFlag"><span class="error_logo" id="error_logo"></span>
+          <span class="err_m" id="err_m">{{ errorMsg }}</span>
+        </div>
+        <div class="loading_tips" id="loading_tips" v-show="loginLoading"><span id="loading_wording">登录中</span><img
+            id="loading_img"
+            place_src="https://ui.ptlogin2.qq.com/style/0/images/load.gif"
+            align="absmiddle"
+            src="https://ui.ptlogin2.qq.com/style/0/images/load.gif">
         </div>
         <div class="qlogin" id="qlogin" style="display: block;" v-show="!loginMode">
           <div class="title" id="title_0" style="display: block;">快捷登录</div>
@@ -47,14 +47,14 @@
                   <span id="qr_mengban" class="qr_mengban">
                   </span>
                   <span id="qr_invalid_tips" class="qr_invalid_tips"> 二维码失效 <br> 请点击刷新 </span></span></span>
-              <a hidefocus="true" draggable="false" tabindex="2" uin="95478654" type="5" class="face">
-                <img id="img_95478654" uin="95478654" type="5"
+              <a hidefocus="true" draggable="false" tabindex="2" :uin="$store.state.role.qq" type="5" class="face">
+                <img id="img_95478654" :uin="$store.state.role.qq" type="5"
                      src="https://thirdqq.qlogo.cn/g?b=sdk&amp;k=k0W8ibDqSpcGibYO5yblvpjQ&amp;kti=Y9o4ywAAAAE&amp;s=100&amp;t=1555644955">
                 <span id="mengban_95478654"></span>
                 <span class="uin_menban"></span>
-                <span class="uin">95478654</span>
-                <span id="img_out_95478654" uin="95478654" type="5" class="img_out"></span>
-                <span id="nick_95478654" class="nick">95478654</span>
+                <span class="uin">{{ $store.state.role.qq }}</span>
+                <span id="img_out_95478654" :uin="$store.state.role.qq" type="5" class="img_out"></span>
+                <span id="nick_95478654" class="nick">{{ $store.state.role.qq }}</span>
                 <span class=""></span> <span class="onekey_logo"></span>
               </a>
             </div>
@@ -77,8 +77,9 @@
                     style="width:1px;height:1px;" src="https://ui.ptlogin2.qq.com/cgi-bin/report?id=301240"></noscript>
                 <div class="title" id="title_2">密码登录</div>
                 <div id="qlogin_entry">
-                  推荐使用<a class="switch_btn_focus link_tips" hidefocus="true" id="switcher_qlogin" href="javascript:void(0);"
-                     tabindex="7" @click="checkToPwd">快捷登录</a>，防止盗号。
+                  推荐使用<a class="switch_btn_focus link_tips" hidefocus="true" id="switcher_qlogin"
+                         href="javascript:void(0);"
+                         tabindex="7" @click="checkToPwd">快捷登录</a>，防止盗号。
                 </div>
                 <div class="operate_tips" id="operate_tips"><span class="operate_content">手机号码也可登录哦， <a
                     class="tips_link" id="bind_account" href="javascript:void(0);">登录个人中心绑定</a> </span><span
@@ -90,19 +91,44 @@
                       style="margin:0px;" onsubmit="1">
                   <div class="uinArea" id="uinArea"><label class="input_tips" id="uin_tips" for="u" data-onlyqq="QQ号码"
                                                            style="display: none;">支持QQ号/邮箱/手机号登录</label>
-                    <div class="inputOuter"><input type="text" class="inputstyle" id="u" name="u" :value="$store.state.qq"
-                                                   tabindex="1"> <a class="uin_del" id="uin_del"
-                                                                    href="javascript:void(0);"
-                                                                    style="display: block;"></a></div>
+                    <div class="inputOuter">
+                      <input
+                          type="text"
+                          class="inputstyle"
+                          id="u"
+                          name="u"
+                          placeholder="支持QQ号/邮箱/手机号登录"
+                          v-model="qq"
+                          tabindex="1"
+                      >
+                      <a class="uin_del"
+                         id="uin_del"
+                         href="javascript:void(0);"
+                         style="display: block;"
+                         @click="clearQQinput"
+                      ></a>
+                    </div>
                     <ul class="email_list" id="email_list"></ul>
                   </div>
-                  <div class="pwdArea" id="pwdArea"><label class="input_tips_focus" id="pwd_tips" for="p"
-                                                           style="display: none;">请输入密码</label>
-                    <div class="inputOuter" id="pwdAreaInputOuter"><input type="password" class="inputstyle password"
-                                                                          id="p" name="p" :value="$store.state.pwd"
-                                                                          maxlength="16" tabindex="2"></div>
-                    <div class="lock_tips" id="caps_lock_tips" style="display: none;"><span
-                        class="lock_tips_row"></span> <span>大写锁定已打开</span></div>
+                  <div class="pwdArea" id="pwdArea">
+                    <div class="inputOuter" id="pwdAreaInputOuter">
+                      <input type="password"
+                             class="inputstyle password"
+                             id="p"
+                             name="p"
+                             v-model="pwd"
+                             placeholder="请输入密码"
+                             maxlength="16"
+                             tabindex="2"
+                      >
+                    </div>
+                    <div
+                        class="lock_tips"
+                        id="caps_lock_tips"
+                        style="display: none;">
+                      <span class="lock_tips_row"></span>
+                      <span>大写锁定已打开</span>
+                    </div>
                   </div>
                   <div class="verifyArea" id="verifyArea">
                     <div class="verifyinputArea" id="verifyinputArea"><label class="input_tips" id="vc_tips"
@@ -115,7 +141,7 @@
                     </div>
                   </div>
                   <div class="submit">
-                    <span class="login_button" hidefocus="true" >
+                    <span class="login_button" hidefocus="true">
                       <input type="button" tabindex="6" value="登录" class="btn" id="login_button" @click="handleLogin">
                     </span>
                   </div>
@@ -161,13 +187,13 @@
           <div class="qr_tips_menban" id="qr_tips_menban"></div>
           <div class="qr_tips_pic qr_tips_pic_chs" id="qr_tips_pic"></div>
         </div>
-        <div class="bottom hide" id="bottom_qlogin" style="display: block;">
+        <div id="bottom_qlogin" v-show="!loginMode" class="bottom hide" style="display: block;">
           <a class="link" hidefocus="true" id="switcher_plogin" href="javascript:void(0);" tabindex="8"
-             v-show="!loginMode" @click="checkToPwd">密码登录</a><span class="dotted" id="docs_dotted"></span><a
+              @click="checkToPwd">密码登录</a><span class="dotted" id="docs_dotted"></span><a
             href="https://ssl.ptlogin2.qq.com/j_newreg_url" class="link" target="_blank"
-            v-show="!loginMode">注册帐号</a><span class="dotted"></span><a class="link" id="feedback_qlogin"
+           >注册帐号</a><span class="dotted"></span><a class="link" id="feedback_qlogin"
                                                                        href="https://support.qq.com/products/14800"
-                                                                       target="_blank" v-show="!loginMode">意见反馈</a>
+                                                                       target="_blank">意见反馈</a>
         </div>
         <div id="authLogin" class="authLogin">
           <div class="authHeader" id="authHeader">
@@ -212,6 +238,7 @@
 <script setup>
 import {defineProps, defineEmits, ref} from "vue";
 import {useStore} from 'vuex'
+import {cancelShade} from "@/utils/shadeControler";
 
 defineProps({
   loginShow: {
@@ -220,13 +247,32 @@ defineProps({
   }
 })
 
+window.addEventListener("keydown", e=>{
+  if (e.code=='Escape') {
+    handleClose()
+  }
+})
+
 const store = useStore()
 
 const loginMode = ref(false)
 
-const loginLoding = ref(false)
+const loginLoading = ref(false)
+
+const qq = ref(store.state.role.qq)
+
+const pwd = ref(store.state.role.pwd)
+
+const errorFlag = ref(false)
+
+const errorMsg = ref("")
 
 const emits = defineEmits(['update'])
+
+const clearQQinput = () => {
+  qq.value = ''
+  document.querySelector("#u").focus()
+}
 
 const checkToPwd = () => {
   loginMode.value = !loginMode.value
@@ -234,33 +280,44 @@ const checkToPwd = () => {
 
 const handleClose = () => {
   emits('update', false)
+  cancelShade()
 }
 
 const handleLogin = () => {
-  let qq = document.getElementById('u').value
-  let pwd = document.getElementById('p').value
-  loginLoding.value = true
-  window.setTimeout(() => {
-    emits('update', false)
-    loginLoding.value = false
-    store.commit('updateQQ',{qq,pwd})
-  }, 500)
+  let qqPattern = /^[1-9][0-9]{4,10}$/;
+  if (qq.value && pwd.value) {
+    if (pwd.value!== localStorage.getItem('pwd') || qq.value!== localStorage.getItem('qq')) {
+      errorFlag.value = true
+      errorMsg.value = "你输入的帐号或密码不正确，请重新输入。"
+    } else if (!qqPattern.test(qq.value.toString())) {
+      document.querySelector("#u").focus()
+      errorFlag.value = true
+      errorMsg.value = "请输入正确的qq号！"
+    } else {
+      loginLoading.value = true
+      errorFlag.value = false
+      errorMsg.value = ""
+      window.setTimeout(() => {
+        store.commit('login')
+        emits('update', false)
+        loginLoading.value = false
+      }, 1000 * Math.random())
+    }
+  } else {
+    document.querySelector("#u").focus()
+    if (!pwd.value) {
+      errorFlag.value = true
+      errorMsg.value = "你还没有输入密码！"
+    }
+    if (!qq.value) {
+      errorFlag.value = true
+      errorMsg.value = "你还没有输入帐号！"
+    }
+  }
 }
 </script>
 
 <style scoped>
-#_overlay_ {
-  background-color: rgb(230, 245, 255);
-  border-top: 1px solid rgb(230, 245, 255);
-  position: absolute;
-  height: 4005px;
-  z-index: 100001;
-  width: 100%;
-  left: 0px;
-  top: 0px;
-  opacity: 0.7;
-}
-
 .loginDiv {
   height: 368px;
   width: 623px;
@@ -386,7 +443,6 @@ input::-ms-reveal {
   outline: 0
 }
 
-.error_tips,
 .login_no_qlogin .header .switch .switch_bottom,
 .login_no_qlogin .header .switch .switch_btn {
   display: none
@@ -460,7 +516,7 @@ input::-ms-reveal {
   left: 50%;
   margin-left: -125px;
   z-index: 1000;
-  top: 50%
+  top: 55%
 }
 
 .error_tips .error_logo {

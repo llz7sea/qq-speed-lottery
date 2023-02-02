@@ -41,16 +41,16 @@
       <!-- 左侧链接Start -->
       <div class="acb_user">
         <ul class="user_links">
-          <li id="spanNotBind_923027">
-            <a title="绑定大区" class="l">绑定大区</a>
+          <li id="spanNotBind_923027" v-show="!$store.state.bound ">
+            <a title="绑定大区" class="l" @click="bindRegion">绑定大区</a>
             <i class="c"></i>
           </li>
-          <li id="spanBind_923027" style="display:none">
+          <li id="spanBind_923027" v-show="$store.state.bound && $store.state.logined">
             所绑大区：
-            <span id="area_info_923027"></span>
+            <span id="area_info_923027">{{ $store.state.role.region }}</span>
             角色：
-            <span id="role_info_923027"></span>
-            <a>更改绑定</a>
+            <span id="role_info_923027">{{ $store.state.role.name }}</span>
+            <a class="changeBind" @click="bindRegion">更改绑定</a>
           </li>
           <li>
             <a title="查看我的奖励" class="l">查看我的奖励</a>
@@ -58,13 +58,13 @@
         </ul>
         <!-- 用户登录模块Start -->
         <div class="user_login">
-          <span id="unlogin" style="display: block;">
+          <span id="unlogin" style="display: block;" v-show="!$store.state.logined">
             亲爱的用户，请<a id="dologin" class="acb_log_btn acb_top_ico" @click="checkLogin">登录</a>
           </span>
-          <span id="logined" style="display:none">
+          <span id="logined" v-show="$store.state.logined">
             欢迎您，
-            <span id="login_qq_span"></span>，
-            <a href="javascript:;" id="dologout" class="acb_log_btn acb_top_ico">注销</a>
+            <span id="login_qq_span">{{ $store.state.role.qq }}</span>，
+            <a href="javascript:;" id="dologout" class="acb_log_btn acb_top_ico" @click="logout">注销</a>
           </span>
         </div>
       </div>
@@ -127,20 +127,55 @@
     </div>
     <!-- 导航E -->
   </div>
-  <loginDialog :loginShow="loginShow" @update="loginShow=$event"></loginDialog>
+  <loginDialog :loginShow="loginShow" @update="finishLogin"></loginDialog>
+  <regionBindDialog :bindShow="bindShow" @update="bindShow=$event"></regionBindDialog>
 </template>
 
 <script setup>
 import {ref} from "vue";
-import loginDialog  from "@/components/loginDialog.vue"
+import loginDialog from "@/components/dialog/loginDialog.vue"
+import regionBindDialog from "@/components/dialog/regionBindDialog.vue"
+import {callShade, cancelShade} from "@/utils/shadeControler";
+import {useStore} from "vuex";
 
+const store = useStore()
 const loginShow = ref(false)
-const checkLogin = ()=>{
-  loginShow.value = true
+const bindShow = ref(false)
+const checkLogin = () => {
+  callShade('white')
+  setTimeout(() => {
+    loginShow.value = true
+  }, 100)
+}
+const logout = () => {
+  store.commit('logout')
+  callShade('black')
+  setTimeout(() => {
+    cancelShade()
+  }, 300)
+}
+const bindRegion = () => {
+  if (store.state.logined) {
+    setTimeout(() => {
+      bindShow.value = true
+      callShade('white')
+    }, 100)
+  } else {
+    checkLogin()
+  }
+}
+const finishLogin = ()=> {
+  loginShow.value = false
+  if(!store.state.bound) {
+    bindRegion()
+  }
 }
 </script>
 
 <style scoped>
+.changeBind {
+  color: #00E;
+}
 .ost {
   width: 100%;
   min-width: 1000px;
@@ -536,7 +571,10 @@ const checkLogin = ()=>{
   background-position: -205px -33px;
 }
 
-.blue_act_comm_box .my_record_box th, .blue_act_comm_box .my_record_box .mrb_tips, .blue_act_comm_box .my_record_box .mrb_page a, .blue_act_comm_box .user_links a:hover {
+.blue_act_comm_box .my_record_box th,
+.blue_act_comm_box .my_record_box .mrb_tips,
+.blue_act_comm_box .my_record_box .mrb_page a,
+.blue_act_comm_box .user_links a:hover {
   color: #22A7D3;
 }
 
@@ -762,5 +800,6 @@ const checkLogin = ()=>{
 .act_nav_list a:hover .act_nav_icon {
   display: block
 }
+
 /* 导航结束 */
 </style>

@@ -1,0 +1,1 @@
+export const regions = ['电信区', '电信二区', '联通区']
