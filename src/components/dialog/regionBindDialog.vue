@@ -10,7 +10,7 @@
                display: block;
                visibility: visible;
                position: fixed;
-               z-index: 100002;
+               z-index: 2005;
                left: 50%;
                top: 50%;
                margin-top: -61.5px;

@@ -76,7 +76,7 @@ const rules = {
 const form = reactive({
   qq: "",
   pwd: "",
-  region: "电信",
+  region: "电信区",
   name: "",
   token: ""
 })
@@ -106,6 +106,6 @@ const submit = () => {
   top: 30%;
   left: 40%;
   background-color: blue;
-  z-index: 100002;
+  z-index: 1801;
 }
 </style>

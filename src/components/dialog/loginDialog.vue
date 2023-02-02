@@ -247,12 +247,6 @@ defineProps({
   }
 })
 
-window.addEventListener("keydown", e=>{
-  if (e.code=='Escape') {
-    handleClose()
-  }
-})
-
 const store = useStore()
 
 const loginMode = ref(false)
@@ -279,7 +273,7 @@ const checkToPwd = () => {
 }
 
 const handleClose = () => {
-  emits('update', false)
+  emits('update')
   cancelShade()
 }
 

@@ -13,7 +13,7 @@ export default createStore({
             name: localStorage.getItem("name"),
             token: localStorage.getItem("token")
         },
-        tokens: ["ABCDEFG", "ABCDEFG"]
+        tokens: ["1"]
     },
     mutations: {
         regist(state, payload) {

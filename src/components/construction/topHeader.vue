@@ -53,7 +53,7 @@
             <a class="changeBind" @click="bindRegion">更改绑定</a>
           </li>
           <li>
-            <a title="查看我的奖励" class="l">查看我的奖励</a>
+            <a title="查看我的奖励" class="l" @click="checkLogin">查看我的奖励</a>
           </li>
         </ul>
         <!-- 用户登录模块Start -->
@@ -142,10 +142,12 @@ const store = useStore()
 const loginShow = ref(false)
 const bindShow = ref(false)
 const checkLogin = () => {
-  callShade('white')
-  setTimeout(() => {
-    loginShow.value = true
-  }, 100)
+  if (!store.state.logined) {
+    callShade('white')
+    setTimeout(() => {
+      loginShow.value = true
+    }, 100)
+  }
 }
 const logout = () => {
   store.commit('logout')
@@ -164,9 +166,9 @@ const bindRegion = () => {
     checkLogin()
   }
 }
-const finishLogin = ()=> {
+const finishLogin = () => {
   loginShow.value = false
-  if(!store.state.bound) {
+  if (!store.state.bound && store.state.logined) {
     bindRegion()
   }
 }
@@ -176,6 +178,7 @@ const finishLogin = ()=> {
 .changeBind {
   color: #00E;
 }
+
 .ost {
   width: 100%;
   min-width: 1000px;
@@ -186,7 +189,7 @@ const finishLogin = ()=> {
   top: 0 !important;
   text-align: left;
   font-size: 12px;
-  z-index: 8000;
+  z-index: 1002;
   font-family: Tahoma;
   overflow: hidden;
 }
@@ -608,7 +611,7 @@ const finishLogin = ()=> {
 .speed_comm_top {
   font: 12px/1.5 '\5FAE\8F6F\96C5\9ED1';
   height: 90px;
-  z-index: 9999;
+  z-index: 2001;
   width: 100%;
 }
 
@@ -620,7 +623,7 @@ const finishLogin = ()=> {
 .speed_comm_top {
   font: 12px/1.5 '\5FAE\8F6F\96C5\9ED1';
   height: 90px;
-  z-index: 9999;
+  z-index: 2001;
   width: 100%
 }
 
