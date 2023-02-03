@@ -54,9 +54,9 @@
           </li>
           <li class="error_message_li"
               id="errorMessage_speed"
-              v-show="region != $store.state.role.region && region"
+              v-show="errorMsg"
           >
-            在该服务器上未获取到角色信息！
+            {{ errorMsg }}
           </li>
           <li style="padding-top:5px;" class="button">
             <button class="role-confirm" id="confirmButtonId_speed" @click="submit">确 定</button>
@@ -69,14 +69,24 @@
 </template>
 
 <script setup>
-import {defineProps, defineEmits, ref} from "vue";
+import {defineProps, defineEmits, ref, watch} from "vue";
 import {cancelShade} from "@/utils/shadeControler";
 import {useStore} from "vuex";
 
-const store =useStore()
+const store = useStore()
 const emit = defineEmits(["update"])
 const policyFlag = ref(false)
 const region = ref("")
+const errorMsg = ref("")
+
+watch(region, v => {
+  if (v != store.state.role.region && v) {
+    errorMsg.value = "在该服务器上未获取到角色信息！"
+  } else {
+    errorMsg.value = ""
+  }
+})
+
 defineProps({
   bindShow: {
     type: Boolean,
@@ -91,7 +101,12 @@ const cancel = () => {
   emit('update', false)
 }
 const submit = () => {
-  emit('update', false)
+  if(region.value != store.state.role.region){
+    errorMsg.value = "请您首先选择大区信息"
+    return
+  }
+  errorMsg.value = ""
+  emit('update')
   store.commit('binding')
 }
 </script>

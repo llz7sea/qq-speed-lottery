@@ -1,0 +1,1 @@
+export const moneyToChance = {2: 1, 20: 11, 100: 60}

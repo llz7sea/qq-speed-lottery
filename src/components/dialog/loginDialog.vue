@@ -312,6 +312,9 @@ const handleLogin = () => {
 </script>
 
 <style scoped>
+#loading_img {
+  display: inline-block;
+}
 .loginDiv {
   height: 368px;
   width: 623px;
@@ -324,7 +327,6 @@ const handleLogin = () => {
   left: 50%;
   display: block;
   visibility: visible;
-  background: red;
 }
 
 html {

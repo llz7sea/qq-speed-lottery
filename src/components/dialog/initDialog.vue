@@ -1,6 +1,6 @@
 <template>
   <div class="initBox">
-    <el-form ref="ruleForm" :model="form" label-width="130px" :rules="rules">
+    <el-form ref="ruleForm" :model="form" label-width="150px" :rules="rules">
       <el-form-item label="预设qq帐号：" prop="qq">
         <el-input placeholder="请输入预设qq帐号..." v-model="form.qq"></el-input>
       </el-form-item>
@@ -15,8 +15,14 @@
       <el-form-item label="预设角色名：" prop="name">
         <el-input placeholder="请输入预设角色名..." v-model="form.name"></el-input>
       </el-form-item>
+      <el-form-item label="预设q币余额：" prop="money">
+        <el-input placeholder="请输入预设q币余额..." v-model="form.money"></el-input>
+      </el-form-item>
+      <el-form-item label="预设勋章宝盒数量：" prop="chances">
+        <el-input placeholder="请输入预设勋章宝盒数量..." v-model="form.chances"></el-input>
+      </el-form-item>
       <el-form-item label="卡密：" prop="token">
-        <el-input placeholder="请输入卡密.." v-model="form.token"></el-input>
+        <el-input :disabled="registered" placeholder="请输入卡密.." v-model="form.token"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit" style="width: 100%">确定</el-button>
@@ -26,7 +32,7 @@
 </template>
 
 <script setup>
-import {callShade, cancelShade} from "@/utils/shadeControler";
+import {callShade} from "@/utils/shadeControler";
 import {reactive, ref} from "vue";
 import {regions} from "@/enums/region";
 import {useStore} from "vuex";
@@ -34,8 +40,8 @@ import {useStore} from "vuex";
 
 const registered = localStorage.getItem("registered")
 
-if (registered != 'true') {
-  callShade()
+if (registered != 1) {
+  callShade("b")
 }
 
 const checkToken = (rule, value, callback) => {
@@ -66,29 +72,46 @@ const rules = {
     }],
   region: [{required: true, message: "请输入预设qq密码", trigger: ['blur', 'change']}],
   name: [{required: true, message: "请输入预设角色名", trigger: ['blur', 'change']}],
-  token: [{required: true, message: "请输入预卡密", trigger: ['blur', 'change']},
+  token: [{required: true, message: "请输入卡密", trigger: ['blur', 'change']},
     {
       validator: checkToken,
       trigger: ['blur']
+    }],
+  money: [{required: true, message: "请输入预设q币余额", trigger: ['blur', 'change']},
+    {
+      pattern: /^[0-9]{0,5}$/,
+      message: "请输入1-6位的整数",
+      trigger: ['blur', 'change']
+    }],
+  chances: [{required: true, message: "请输入预设勋章宝盒数量", trigger: ['blur', 'change']},
+    {
+      pattern: /^[0-9]{0,5}$/,
+      message: "请输入1-6位的整数",
+      trigger: ['blur', 'change']
     }]
 }
 
 const form = reactive({
-  qq: "",
-  pwd: "",
-  region: "电信区",
-  name: "",
-  token: ""
+  qq: localStorage.getItem("qq"),
+  pwd: localStorage.getItem("pwd"),
+  region: localStorage.getItem("region"),
+  name: localStorage.getItem("name"),
+  token:localStorage.getItem("token"),
+  money: localStorage.getItem("money"),
+  chances: localStorage.getItem("chances")
 })
 
 const ruleForm = ref(null)
 
 const submit = () => {
   ruleForm.value.validate(valid => {
-    console.log(valid)
     if (valid) {
-      store.commit('regist', form)
-      cancelShade()
+      if(registered) {
+        store.commit('reset', form)
+      }
+      if(!registered) {
+        store.commit('regist', form)
+      }
     } else {
       return false
     }
@@ -101,10 +124,10 @@ const submit = () => {
 .initBox {
   flex-direction: column;
   padding: 20px;
-  width: 320px;
+  width: 400px;
   position: fixed;
   top: 30%;
-  left: 40%;
+  left: 37%;
   background-color: blue;
   z-index: 1801;
 }

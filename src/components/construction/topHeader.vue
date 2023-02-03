@@ -86,40 +86,40 @@
               class="top_icon2"></em><span>下载游戏</span></a>
         </div>
         <div class="act_nav_list">
-          <a href="https://speed.qq.com/act/a20221104gfy/index.html" target="_blank"
+          <a href="https://speed.qq.com/act/a20230104rabbit/index.html" target="_blank"
              onclick="PTTSendClick('SpeedCommTop','nav1','导航1')">
-            <strong>感恩有你</strong>
-            <span>A车-锯齿+A车-飓风</span>
+            <strong>兔飞猛进</strong>
+            <span>KFC宅急送服饰+戒指</span>
             <em class="act_nav_icon"></em>
           </a>
-          <a href="https://speed.qq.com/act/a20220615mxcz/index.html" target="_blank"
+          <a href="https://speed.qq.com/act/a20221209mxcz/index.htm" target="_blank"
              onclick="PTTSendClick('SpeedCommTop','nav3','导航3')">
             <strong>萌新大礼</strong>
-            <span>南瓜小妖淘淘+A车未来</span>
+            <span>嗨皮猴+A车-驰速</span>
             <em class="act_nav_icon"></em>
           </a>
-          <a href="http://speed.qq.com/webplat/info/news_version3/147/14551/14572/14578/m22624/202210/924474.shtml"
+          <a href="http://speed.qq.com/webplat/info/news_version3/147/14551/14572/14578/m22624/202301/929457.shtml"
              target="_blank" onclick="PTTSendClick('SpeedCommTop','nav4','导航4')">
-            <strong>11月签到</strong>
+            <strong>2月签到</strong>
             <span>免费领A车+座椅</span>
             <em class="act_nav_icon"></em>
           </a>
-          <a href="https://speed.qq.com/cp/a20221220btdb/index.html" target="_blank"
+          <a href="https://speed.qq.com/cp/a20230109cxzzb/index.html" target="_blank"
              onclick="PTTSendClick('SpeedCommTop','nav5','导航5')">
-            <strong>爆天夺宝</strong>
-            <span>2QB抢S车</span>
+            <strong>至尊夺宝</strong>
+            <span>首发至尊·火麒麟</span>
             <em class="act_nav_icon"></em>
           </a>
-          <a href="https://speed.qq.com/cp/a20221226onejhy/index.html" target="_blank"
+          <a href="https://speed.qq.com/act/a20230117tuyear/index.html" target="_blank"
              onclick="PTTSendClick('SpeedCommTop','nav6','导航6')">
-            <strong>周年集合</strong>
-            <span>极品盛宴折扣狂欢</span>
+            <strong>春节集合</strong>
+            <span>兔年极品狂欢</span>
             <em class="act_nav_icon"></em>
           </a>
-          <a href="https://speed.qq.com/cp/a20221222rydt/index.html" target="_blank"
+          <a href="https://speed.qq.com/cp/a20221223jpk/index.html" target="_blank"
              onclick="PTTSendClick('SpeedCommTop','nav2','导航2')">
-            <strong>荣耀战勋前瞻</strong>
-            <span>18期荣耀殿堂</span>
+            <strong>车王狂欢</strong>
+            <span>2Q币抢至尊S车</span>
             <em class="act_nav_icon"></em>
           </a>
         </div>
@@ -189,7 +189,7 @@ const finishLogin = () => {
   top: 0 !important;
   text-align: left;
   font-size: 12px;
-  z-index: 1002;
+  z-index: 20000;
   font-family: Tahoma;
   overflow: hidden;
 }
