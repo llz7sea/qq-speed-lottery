@@ -4,7 +4,6 @@
 * @Last Modified time: 2018-07-04 17:10:34
 */
 export function Lottery(option) {
-    // var _public = this;
     var _static = {};
     var _private = {
         /**
@@ -14,8 +13,6 @@ export function Lottery(option) {
          * @param {number} pos      插入的位置
          */
         addRule: function (selector, styleObj, pos) {
-
-
             var text = '';
             var style = document.getElementsByTagName('style')[0];
             if (!style) {
@@ -32,26 +29,12 @@ export function Lottery(option) {
                 }
             }
             pos = pos || 0;
-
-            // function getTag(tagName, oParent) {
-            //     return (oParent || document).getElementsByTagName(tagName);
-            // }
-
-            // function getClass(className, element, tagName) {
-            //     var i = 0, aClass = [], reClass = new RegExp("(^|\\s)" + className + "(\\s|$)"),
-            //         aElement = getTag(tagName || "*", element || document);
-            //     for (i = 0; i < aElement.length; i++) reClass.test(aElement[i].className) && aClass.push(aElement[i]);
-            //     return aClass;
-            // }
-
-
             if ('insertRule' in sheet) {
                 //alert("现代浏览器");
                 //////console.log(pos)
                 sheet.insertRule(selector + '{' + text + '}', pos)
             } else {
                 //////console.log(selector);
-
                 // if (!/\@keyframes/.test(selector)) {
                 //     sheet.addRule(selector, text, pos);
                 // }
@@ -133,12 +116,6 @@ export function Lottery(option) {
                 return obj;
             }
             var style = getStyle(document.createElement('div'), null);
-            // var map = {
-            //     '-webkit-': 'webkit',
-            //     '-moz-': 'Moz',
-            //     '-ms-': 'ms',
-            //     '-o-': 'O'
-            // }
             for (var k in style) {
                 theCSSPrefix = (k.match(rxPrefixes) || (+k == k && style[k].match(rxPrefixes)));
                 if (theCSSPrefix) {
@@ -148,9 +125,7 @@ export function Lottery(option) {
             if (!theCSSPrefix) {
                 return obj;
             }
-
             theCSSPrefix = theCSSPrefix[0];
-
             if (theCSSPrefix.slice(0, 1) === '-') {
                 obj['css'] = theCSSPrefix
                 obj['js'] = ({
@@ -211,8 +186,6 @@ export function Lottery(option) {
             }
         }
     }
-
-    // var _static = this.constructor;
     // 插件默认配置
     _static.config = {
         'lighturl': '//ossweb-img.qq.com/images/js/delottery/sel.png',//外部光圈png  不填写就用默认的效果
@@ -242,16 +215,9 @@ export function Lottery(option) {
         'sx': 0,//开始抽奖按钮x坐标
         'sy': 0//开始抽奖按钮y坐标
     };
-
-    /**
-     * css前缀
-     * @type {[type]}
-     */
     _private.prefix = _private.detectCSSPrefix().css;
     var myBrowser = _private.myBrowser();
-
     var _self = this;
-
     function cloneObj(oldObj) { //复制对象方法
         if (typeof (oldObj) != 'object') return oldObj;
         if (oldObj == null) return oldObj;
@@ -260,10 +226,8 @@ export function Lottery(option) {
             newObj[i] = cloneObj(oldObj[i]);
         return newObj;
     }
-
     function extendObj() { //扩展对象
         var args = arguments;
-        // ////////console.log(args);
         if (args.length < 2) return;
         var temp = cloneObj(args[0]); //调用复制对象方法
         for (var n = 1; n < args.length; n++) {
@@ -273,19 +237,14 @@ export function Lottery(option) {
         }
         return temp;
     }
-
     if (_private.isMobile()) {
         //alert(1);
         var gZoom = document.getElementById(option.contentId).parentNode.clientWidth / option.width || 1;
         _private.lotteryZoom(option, gZoom);
     }
-
-
-    //console.log(option);
     _self.config = extendObj({}, _static.config, option);
     var config = _self.config;
     var clsPre = config.contentId;
-
     var classes = {
         'container': clsPre + '_container',
         'start': clsPre + '_start',
@@ -298,7 +257,6 @@ export function Lottery(option) {
         'bgLight': clsPre + '_bgLight',
         'borderLight': clsPre + '_borderLight'
     }
-    // ////////console.log(config['contentId']);
     var startBtn = null, moveBox = null, container = document.getElementById(config['contentId']);
     // container.style = "position:relative; left:0; top:0; z-index:2;"
 
@@ -435,7 +393,6 @@ export function Lottery(option) {
             }
         }
     })();
-
     var btn = {
         disable: function () {
             if (startBtn.className == classes['disable']) {
@@ -448,40 +405,10 @@ export function Lottery(option) {
             startBtn.className = classes['start'];
         }
     }
-
     this.bind = (function () {
-
-
-        ////////console.log(startBtn);
-
         startBtn.onclick = function () {
             btn.disable() && config.onClickRollEvent();
         }
-
-
-        // var animationendNames = [
-        //     'animationend',
-        //     'webkitAnimationEnd',
-        //     'MozAnimationEnd',
-        //     'oAnimationEnd'
-        // ];
-        // //事件检测绑定
-        // var animationend = function(elem, callback) {
-        //     var handler = function(e) {
-        //         if (animationendNames) {
-        //             var animationendName = e.type;
-        //             transitionend = function(elem, callback) {
-        //                 $(elem).bind(animationendName, callback);
-        //             };
-        //             animationendNames = null;
-        //         }
-        //         return callback.call(elem, e);
-        //     };
-
-        //     for (var i=0, len=animationendNames.length; i<len; i++) {
-        //         $(elem).bind(animationendNames[i], handler);
-        //     }
-        // };
     })();
     //处理步骤
     var step = [];

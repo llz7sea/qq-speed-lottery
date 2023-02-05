@@ -29,124 +29,129 @@
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop1.png">
               <em class="sp"><b>S车</b></em>
               <p>至尊·盘龙<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[0][0]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop1.png">
               <em class="sp"><b>S车</b></em>
               <p>至尊·盘龙<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[0][1]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop2.png">
               <em class="sp"><b>S车</b></em>
               <p>至尊·麦凯伦<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[0][2]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop2.png">
               <em class="sp"><b>S车</b></em>
               <p>至尊·麦凯伦<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[0][3]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop3.png">
               <em class="sp"><b>T1</b></em>
               <p>启灵守护神<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[1][0]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop3.png">
               <em class="sp"><b>T1</b></em>
               <p>启灵守护神<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[1][1]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop4.png">
               <em class="sp"><b>T1</b></em>
               <p>侍武之魂<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[1][2]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop4.png">
               <em class="sp"><b>T1</b></em>
               <p>侍武之魂<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[1][3]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop5.png">
               <em class="sp"><b>A车</b></em>
               <p>缤纷神驹<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[2][0]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop5.png">
               <em class="sp"><b>A车</b></em>
               <p>缤纷神驹<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[2][1]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop6.png">
               <em class="sp"><b>A车</b></em>
               <p>白玉神驹<br>永久/30天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[2][2]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop6.png">
               <em class="sp"><b>A车</b></em>
               <p>白玉神驹<br>永久/1天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[2][3]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop7.png">
               <em class="sp"><b>B车</b></em>
               <p>睡梦阿狸<br>永久/10天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[3][0]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop8.png">
               <em class="sp"><b>B车</b></em>
               <p>萌菜出击<br>永久/10天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[3][1]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop9.png">
               <em class="sp"><b>B车</b></em>
               <p>逐浪独角兽<br>永久/10天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[3][2]"></span>
             </li>
             <li>
               <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s1_prop10.png">
               <em class="sp"><b>B车</b></em>
               <p>消除联萌<br>永久/10天</p>
-              <span class="box_zz pa"></span>
+              <span class="box_zz pa" v-show="$store.state.logined && $store.state.role.highLight[3][3]"></span>
             </li>
           </ul>
-          <div class="box_s1_bar"><!--进度条模块-->
+
+          <!--进度条模块srtart-->
+          <div class="box_s1_bar">
             <div>
-              <span></span><!--进度条，百分比改变宽度-->
+              <span
+                  :style="`width: ${$store.state.role.blessTotal == 0 ? 0 : ($store.state.role.blessValue / $store.state.role.blessTotal) * 100}%`"></span>
+              <!--进度条，百分比改变宽度-->
             </div>
           </div>
           <div class="box_s1_num">
-            <p><span class="zz">0</span><span class="zzz">/</span><span class="zzzz">0</span></p>
+            <p><span class="zz">{{ $store.state.role.blessValue }}</span><span class="zzz">/</span><span
+                class="zzzz">{{ $store.state.role.blessTotal }}</span></p>
           </div>
+          <!--进度条模块end-->
           <div class="box_s1_txt">
             <b>车王的祝福：</b>
             <p>每当重复点亮已点亮的赛车勋章时，均会获得车王的祝福，每当祝福值达到满值时，下次打开宝盒必定能随机点亮一个未被点亮<br>的赛车勋章。每次点亮未点亮的赛车勋章时，祝福值会被清空。</p>
           </div>
           <div class="box_s1_btn">
             <a
-                @click="openCase(1)"
                 class="sp db btn_open1"
+                @click="openCase(1)"
             >打开1</a>
             <a
-                @click="openCase(10)"
                 class="sp db btn_open10"
+                @click="openCase(10)"
             >打开10</a>
             <a
-                @click="openRepository"
                 class="sp db btn_zc"
-                onclick="PTTSendClick('btn','btn_zc','暂存')">暂存</a>
+                @click="openRepository">暂存</a>
           </div>
           <p class="txt_s1_num">剩余的勋章宝盒数量：<span id="medalNum">{{
               $store.state.logined ? $store.state.role.chances : 0
@@ -156,7 +161,7 @@
           <h2 class="tit_s2 spt"></h2>
           <p class="txt_ts">累计点亮勋章数量达到4个、6个、8个、9个、11个、12个、14个、16个时，分别可以获得一次转动车王轮盘的机会，
             <br>每次转动可随机获得一个永久奖励，已经获得的永久奖励不会重复获得。</p>
-          <div class="lottery" id="lotterycontent">
+          <div id="lotterycontent" class="lottery">
             <ul class="list_lo">
               <li id="show0"><!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop1.png">
@@ -207,16 +212,16 @@
                 <i></i>
               </li>
             </ul>
-            <a href="javascript:;"
-               class="pa btn_cj"
+            <a class="pa btn_cj"
+               href="javascript:;"
                @click="rollDish"
             >
-              <p>剩余的次数:<span id="residueNum">0</span></p>
+              <p>剩余的次数:<span id="residueNum">{{ $store.state.role.rollDishChances }}</span></p>
             </a>
-            <div id="swflotterycontent_container" class="lotterycontent_container"><a hidefocus="true"
-                                                                                      id="lotterycontent_start"
-                                                                                      href="javascript:;"
-                                                                                      class="lotterycontent_start">
+            <div id="swflotterycontent_container" class="lotterycontent_container"><a id="lotterycontent_start"
+                                                                                      class="lotterycontent_start"
+                                                                                      hidefocus="true"
+                                                                                      href="javascript:;">
               <div class="lotterycontent_slight"></div>
             </a>
               <div id="lotterycontent_hover" class="lotterycontent_hover"></div>
@@ -232,9 +237,9 @@
           <p>5、车王赛车图鉴获得的可分解奖励存放在暂存箱中，玩家可在活动期间自行选择领取或分解奖励。</p>
           <p>6、由于篇幅限制，本活动概率公示将会在新闻概率公示页面中发布。<a
               href="javascript:location.href='https://speed.qq.com/webplat/info/news_version3/147/534/552/553/m15538/201801/684484.shtml';"
-              onclick="PTTSendClick('btn','btn_look','点击查看')">点击查看</a></p>
+              >点击查看</a></p>
           <p>7、关于“永久”的定义，请见<a href="javascript:"
-                              onclick="PTTSendClick('btn','btn_txxy','《腾讯游戏许可及服务协议》')">《腾讯游戏许可及服务协议》</a>第4.8条。
+                              >《腾讯游戏许可及服务协议》</a>第4.8条。
           </p>
         </div>
       </div>
@@ -249,36 +254,58 @@
       @update="bindShow=false"
   ></regionBindDialog>
   <purchaseDialog
-      :purchaseShow="purchaseShow"
       :money="payMoney"
-      @update="confirmPurchase"
+      :purchaseShow="purchaseShow"
       @close="purchaseShow=false"
+      @update="confirmPurchase"
   ></purchaseDialog>
   <insufficientDialog
       :insufficientShow="insufficientShow"
       @close="insufficientShow=false"
   ></insufficientDialog>
   <paymentDialog
-      :paymentShow="paymentShow"
       :payMoney="payMoney"
-      @update="confirmPay"
+      :paymentShow="paymentShow"
       @close="paymentShow = false"
+      @update="confirmPay"
   ></paymentDialog>
-  <congratulationDialog :visible="congratulationShow" :chanceNum="moneyToChance[payMoney]" :money="payMoney" @close="congratulationShow=false"></congratulationDialog>
+  <congratulationDialog
+      :chanceNum="moneyToChance[payMoney]"
+      :money="payMoney"
+      :visible="congratulationShow"
+      @close="congratulationShow=false"
+  ></congratulationDialog>
+  <cantRollDialog :visible="cantRollShow" @close="cantRollShow = false"></cantRollDialog>
+  <resultDialog :visible="resultShow" :resultData="resultData" @close="resultShow = false"></resultDialog>
+  <repositoryDialog :visible="repositoryShow" @close="repositoryShow = false"></repositoryDialog>
 </template>
 
 <script setup>
 import $ from 'jquery'
-import {ref} from "vue";
+import {reactive, ref} from "vue";
+import {callShade} from "@/utils/shadeControler";
+import {useStore} from "vuex";
+import {moneyToChance} from "@/enums/price";
 import loginDialog from "@/components/dialog/loginDialog.vue"
 import regionBindDialog from "@/components/dialog/regionBindDialog.vue"
 import purchaseDialog from "@/components/dialog/purchaseDialog.vue"
 import insufficientDialog from "@/components/dialog/insufficientDialog.vue"
 import paymentDialog from "@/components/dialog/paymentDialog.vue"
 import congratulationDialog from "@/components/dialog/congratulationDialog.vue"
-import {callShade} from "@/utils/shadeControler";
-import {useStore} from "vuex";
-import {moneyToChance} from "@/enums/price";
+import cantRollDialog from "@/components/dialog/cantRollDialog.vue"
+import resultDialog from "@/components/dialog/resultDialog.vue"
+import repositoryDialog from "@/components/dialog/repositoryDialog"
+import bus from "vue3-eventbus"
+
+console.log(loginDialog)
+console.log(regionBindDialog)
+console.log(purchaseDialog)
+console.log(insufficientDialog)
+console.log(paymentDialog)
+console.log(congratulationDialog)
+console.log(cantRollDialog)
+console.log(resultDialog)
+console.log(repositoryDialog)
 
 $(document).ready(function () {
   var a, c;
@@ -295,6 +322,9 @@ $(document).ready(function () {
 });
 
 const store = useStore()
+bus.on("win", () => {
+  resultData.win = true
+})
 
 const loginShow = ref(false)
 const bindShow = ref(false)
@@ -302,7 +332,11 @@ const purchaseShow = ref(false)
 const insufficientShow = ref(false)
 const paymentShow = ref(false)
 const congratulationShow = ref(false)
+const cantRollShow = ref(false)
+const resultShow = ref(false)
+const repositoryShow = ref(false)
 
+const resultData = reactive({current: 0})
 const payMoney = ref(2)
 
 const checkLogin = () => {
@@ -338,28 +372,55 @@ const purchase = m => {
 }
 const confirmPurchase = () => {
   purchaseShow.value = false
-  paymentShow.value = true
   callShade("blcak")
+  setTimeout(() => {
+    paymentShow.value = true
+  }, 200)
 }
-const confirmPay = () => {
+const confirmPay = m => {
   paymentShow.value = false
   congratulationShow.value = true
-  store.commit("purchaseChances",[moneyToChance[payMoney],payMoney])
+  if (!m) {
+    store.commit("purchaseChances", [moneyToChance[payMoney.value], payMoney.value])
+  }
+  if (m) {
+    store.commit("purchaseChancesWithoutQcoin", moneyToChance[payMoney.value])
+  }
 }
+// 核心抽奖 start
 const openCase = q => {
   checkLogin()
   if (store.state.logined) {
     if (store.state.role.chances < q) {
       insufficientShow.value = true
+    } else {
+      let count = 0
+      store.commit("lottery", q)
+      store.state.role.highLight.flat().forEach(c => {
+        if (c == 1) {
+          count++
+        }
+      })
+      resultData.current = count
+      resultShow.value = true
     }
-    console.log(q)
   }
 }
+// 核心抽奖 end
+
 const openRepository = () => {
   checkLogin()
+  if (store.state.logined) {
+    callShade("black")
+    repositoryShow.value = true
+  }
 }
 const rollDish = () => {
   checkLogin()
+  if (store.state.logined) {
+    callShade("grey")
+    cantRollShow.value = true
+  }
 }
 </script>
 

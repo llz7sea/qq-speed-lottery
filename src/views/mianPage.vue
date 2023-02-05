@@ -2,8 +2,8 @@
   <div class="pageContainer">
     <topHeader></topHeader>
     <pageBody></pageBody>
-    <initDialog v-show="initShow"></initDialog>
-    <commandDialog v-show="consoleShow"></commandDialog>
+    <initDialog :visible="initShow" @close="initShow = false"></initDialog>
+    <commandDialog :visible="consoleShow" @close="consoleShow=false"></commandDialog>
   </div>
 </template>
 
@@ -20,11 +20,19 @@ window['consoleShow'] = false
 const consoleShow = ref(false)
 const initShow = ref(!store.state.registered)
 
-window.addEventListener('keydown',e=>{
-  if(e.key == "p") {
-    consoleShow.value = !consoleShow.value
-  }
-})
+if(store.state.registered) {
+  window.addEventListener('keydown',e=>{
+    if(e.key == "Home") {
+      initShow.value = !initShow.value
+    }
+  })
+  window.addEventListener('keydown',e=>{
+    console.log(e)
+    if(e.key == "Insert") {
+      consoleShow.value = !consoleShow.value
+    }
+  })
+}
 </script>
 
 <style scoped>

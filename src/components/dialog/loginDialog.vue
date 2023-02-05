@@ -47,16 +47,6 @@
                   <span id="qr_mengban" class="qr_mengban">
                   </span>
                   <span id="qr_invalid_tips" class="qr_invalid_tips"> 二维码失效 <br> 请点击刷新 </span></span></span>
-              <a hidefocus="true" draggable="false" tabindex="2" :uin="$store.state.role.qq" type="5" class="face">
-                <img id="img_95478654" :uin="$store.state.role.qq" type="5"
-                     src="https://thirdqq.qlogo.cn/g?b=sdk&amp;k=k0W8ibDqSpcGibYO5yblvpjQ&amp;kti=Y9o4ywAAAAE&amp;s=100&amp;t=1555644955">
-                <span id="mengban_95478654"></span>
-                <span class="uin_menban"></span>
-                <span class="uin">{{ $store.state.role.qq }}</span>
-                <span id="img_out_95478654" :uin="$store.state.role.qq" type="5" class="img_out"></span>
-                <span id="nick_95478654" class="nick">{{ $store.state.role.qq }}</span>
-                <span class=""></span> <span class="onekey_logo"></span>
-              </a>
             </div>
           </div>
           <div class="guanjia hide"><img class="guanjia_logo hide"
@@ -207,7 +197,7 @@
             <span class="uin" id="auth_uin"></span> <span class="img_out_focus"></span> <span class="nick"
                                                                                               id="auth_nick"></span></a>
           </div>
-          <div class="cancleAuthOuter" id="cancleAuthOuter"><a id="cancleAuth" class="cancleAuth">使用其他帐号</a></div>
+          <div class="cancelAuthOuter" id="cancelAuthOuter"><a id="cancelAuth" class="cancelAuth">使用其他帐号</a></div>
           <div class="bottom"></div>
         </div>
         <div id="newVcodeArea" class="newVcodeArea" style="display: none;">
@@ -293,6 +283,7 @@ const handleLogin = () => {
       errorMsg.value = ""
       window.setTimeout(() => {
         store.commit('login')
+        store.commit('binding')
         emits('update', false)
         loginLoading.value = false
       }, 1000 * Math.random())
@@ -1017,12 +1008,12 @@ input::-ms-reveal {
   opacity: .3
 }
 
-.authLogin .cancleAuthOuter {
+.authLogin .cancelAuthOuter {
   margin-top: 10px;
   text-align: center
 }
 
-.authLogin .cancleAuth {
+.authLogin .cancelAuth {
   display: inline-block;
   height: 14px;
   border: 1px solid #d3d3d3;

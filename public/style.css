@@ -9,6 +9,12 @@ body {
     background-color: #0d3d46;
     overflow-x: hidden;
     -webkit-text-size-adjust: none !important;
+    font-family: "helvetica neue", "hiragino sans gb", PingFangSC-Light, Arial, tahoma, "microsoft yahei ui", "microsoft yahei", 微软雅黑, simsun, sans-serif;
+}
+
+
+.el-select-dropdown__wrap {
+    max-height: 100px!important;
 }
 
 @-webkit-keyframes fadeInLeft {
@@ -537,7 +543,6 @@ img {
 }
 
 .box_zz {
-    display: none;
     width: 245px;
     height: 244px;
     background: url(//game.gtimg.cn/images/speed/cp/a20221223jpk/box_zz.png) no-repeat;
@@ -1004,8 +1009,9 @@ img {
 /*pop5*/
 .dia-con5 {
     background: url(//game.gtimg.cn/images/speed/cp/a20221223jpk/pop_bg1.jpg) no-repeat;
+    background-size: 100% 100%;
     width: 474px;
-    height: 305px;
+    min-height: 305px;
     box-sizing: border-box;
     padding-top: 80px;
 }
@@ -1674,8 +1680,8 @@ ol, ul {
 
 .prop-price em {
     font-size: 38px;
-    font-weight: 200;
-    color: #313131
+    font-weight: 500;
+    color: #313131;
 }
 
 .total-price-in-button.twins-total-price-in-button {
@@ -2119,11 +2125,6 @@ ol, ul {
     height: 100%;
     z-index: 9998;
     background-color: #fff
-}
-
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px
 }
 
 ::-webkit-scrollbar-thumb {

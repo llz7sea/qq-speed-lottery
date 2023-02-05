@@ -2,22 +2,22 @@
   <div class="ost ost_bg" style="position: absolute; top: -500px;">
     <ul class="ost_b">
       <li class="ost_tg ost_bg"><a href="//game.qq.com" target="_blank" class="ost_blnk"
-                                   onclick="pgvSendClick({hottag:'act.title.logo'});">腾讯游戏</a></li>
+                                   >腾讯游戏</a></li>
       <li class="ost_gg ost_bg">
         <a href="http://speed.qq.com/" id="ost_gg" target="_blank" class="ost_blnk"
-           onclick="pgvSendClick({hottag:'act.title.index'});">精彩活动</a>
+           >精彩活动</a>
       </li>
       <li class="ost_i"><p class="ost_t ost_bg"><a href="//speed.qq.com/main.shtml" target="_blank" class="ost_lnk"
-                                                   onclick="pgvSendClick({hottag:'act.title.back'});">返回官网首页</a></p>
+                                                   >返回官网首页</a></p>
         <p class="ost_gl">
           <a href="//speed.qq.com/web201008/download.shtml" target="_blank" class="ost_lnk ost_ldc"
-             onclick="pgvSendClick({hottag:'act.title.dl'});">游戏下载</a>
+             >游戏下载</a>
           <a
               href="//speed.qq.com/comm-htdocs/pay/?t=speed" target="_blank" class="ost_lnk ost_ldc"
-              onclick="pgvSendClick({hottag:'act.title.cz'});">充值点券</a>
+              >充值点券</a>
           <a href="//speed.qq.com/comm-htdocs/vip/?t=speed"
              target="_blank" class="ost_lnk ost_ldc"
-             onclick="pgvSendClick({hottag:'act.title.vip'});">开通紫钻</a>
+             >开通紫钻</a>
         </p>
       </li>
     </ul>
@@ -35,8 +35,8 @@
         </a>
         <a href="//speed.qq.com/" title="QQ飞车官方网站" class="acb_big_btn acb_top_ico" target="_blank"><i
             class="acb_top_ico acb_home_ico "></i>官方网站</a>
-        <a href="javascript:share('qqzone')" title="分享到Qzone" class="acb_qq_btn acb_top_ico"></a>
-        <a href="javascript:share('qqwb')" title="分享到QQ微博" class="acb_qt_btn acb_top_ico"></a>
+        <a title="分享到Qzone" class="acb_qq_btn acb_top_ico"></a>
+        <a title="分享到QQ微博" class="acb_qt_btn acb_top_ico"></a>
       </div>
       <!-- 左侧链接Start -->
       <div class="acb_user">
@@ -77,47 +77,47 @@
     <!-- 导航S -->
     <div class="act_top_nav">
       <div class="act_nav_con">
-        <a href="/main.shtml" onclick="PTTSendClick('SpeedCommTop','logo','QQ飞车')" target="_blank"
+        <a href="/main.shtml"  target="_blank"
            class="act_nav_logo"></a>
         <div class="act_top_btn">
-          <a href="/main.shtml" onclick="PTTSendClick('SpeedCommTop','home','进入官网')" target="_blank"><em
+          <a href="/main.shtml"  target="_blank"><em
               class="top_icon1"></em><span>进入官网</span></a>
-          <a href="/web201503/page/download.shtml" onclick="PTTSendClick('SpeedCommTop','down','下载游戏')" target="_blank"><em
+          <a href="/web201503/page/download.shtml"  target="_blank"><em
               class="top_icon2"></em><span>下载游戏</span></a>
         </div>
         <div class="act_nav_list">
           <a href="https://speed.qq.com/act/a20230104rabbit/index.html" target="_blank"
-             onclick="PTTSendClick('SpeedCommTop','nav1','导航1')">
+             >
             <strong>兔飞猛进</strong>
             <span>KFC宅急送服饰+戒指</span>
             <em class="act_nav_icon"></em>
           </a>
           <a href="https://speed.qq.com/act/a20221209mxcz/index.htm" target="_blank"
-             onclick="PTTSendClick('SpeedCommTop','nav3','导航3')">
+             >
             <strong>萌新大礼</strong>
             <span>嗨皮猴+A车-驰速</span>
             <em class="act_nav_icon"></em>
           </a>
           <a href="http://speed.qq.com/webplat/info/news_version3/147/14551/14572/14578/m22624/202301/929457.shtml"
-             target="_blank" onclick="PTTSendClick('SpeedCommTop','nav4','导航4')">
+             target="_blank" >
             <strong>2月签到</strong>
             <span>免费领A车+座椅</span>
             <em class="act_nav_icon"></em>
           </a>
           <a href="https://speed.qq.com/cp/a20230109cxzzb/index.html" target="_blank"
-             onclick="PTTSendClick('SpeedCommTop','nav5','导航5')">
+             >
             <strong>至尊夺宝</strong>
             <span>首发至尊·火麒麟</span>
             <em class="act_nav_icon"></em>
           </a>
           <a href="https://speed.qq.com/act/a20230117tuyear/index.html" target="_blank"
-             onclick="PTTSendClick('SpeedCommTop','nav6','导航6')">
+             >
             <strong>春节集合</strong>
             <span>兔年极品狂欢</span>
             <em class="act_nav_icon"></em>
           </a>
           <a href="https://speed.qq.com/cp/a20221223jpk/index.html" target="_blank"
-             onclick="PTTSendClick('SpeedCommTop','nav2','导航2')">
+             >
             <strong>车王狂欢</strong>
             <span>2Q币抢至尊S车</span>
             <em class="act_nav_icon"></em>
@@ -137,7 +137,6 @@ import loginDialog from "@/components/dialog/loginDialog.vue"
 import regionBindDialog from "@/components/dialog/regionBindDialog.vue"
 import {callShade, cancelShade} from "@/utils/shadeControler";
 import {useStore} from "vuex";
-
 const store = useStore()
 const loginShow = ref(false)
 const bindShow = ref(false)

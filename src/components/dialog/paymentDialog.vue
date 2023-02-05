@@ -9,7 +9,7 @@
         <div
             title="关闭"
             class="header-icon-last"
-            @click="cancle"
+            @click="cancel"
         ><i
             class="midas_minipay_dialog_icon midas_minipay_dialog_icon_i midas_minipay_dialog_icon_clear"></i>&nbsp;
         </div>
@@ -17,7 +17,9 @@
       <div class="midas_minipay_dialog_content" style="height: auto">
         <div class="cp-container" id="body" inited="1" style="display: block;">
           <div id="wrapper" avalonctrl="root">
-            <div id="order" class="panel show" style="display: block;">
+
+            <!--      订单界面start      -->
+            <div id="order" class="panel show" v-show="!paySuccessFlag" style="display: block;">
               <div avalonctrl="order">
                 <div>
                   <div>
@@ -25,34 +27,21 @@
                       <!--ms-if-->
                       <div class="prop" style="padding-top: 25px;padding-bottom: 25px">
                         <div class="account">
-
                           <div class="account-area">
-                            <!-- 账号 & 游戏大厅 -->
-                            <!--  <p class="account-title">购入账号：565220833(QQ) | 游戏大区1</p>-->
-
-                            <!-- 账号 & 赠送功能 -->
                             <span class="account-title"></span>
                             <div class="account-id active account-default-id" style="margin-left: 0">
                               <div>
                                 <span class="loged-id"></span>
-                                <!--ms-if-->
                               </div>
-
-                              <!--ms-if-->
-
                             </div>
                           </div>
-
-
                         </div>
-
                         <div class="prop-detail">
                           <div class="prop-img">
-                            <img height="90px" src="//ossweb-img.qq.com/images/daoju/mall/djlogo90_90.png">
+                            <img src="//ossweb-img.qq.com/images/daoju/mall/djlogo90_90.png">
                           </div>
                           <div class="prop-info">
                             <p class="prop-title">支付订单</p>
-                            <!--ms-if-->
                             <p class="unit" style="display: none;">
                               单价：<span>0</span>元
                             </p>
@@ -63,7 +52,6 @@
                           </div>
                         </div>
                       </div>
-                      <div style="display: none;"></div>
                     </div>
                     <div>
                       <div class="pay-area" style="min-height:100px;" avalonctrl="channel">
@@ -73,17 +61,17 @@
                             <span>支付方式：</span>
                           </h3>
                           <div class="channels">
-                            <div class="channel" :class="mode==0 && 'checked'" @click="mode=0">
+                            <div class="channel" :class="mode==0 && 'checked'" @click="modeCheck(0)">
                               <span>Q币支付</span>
                               <!--ms-if-->
                               <i class="icon-corner-checked"></i>
                             </div>
-                            <div class="channel" :class="mode==1 && 'checked'" @click="mode=1">
+                            <div class="channel" :class="mode==1 && 'checked'" @click="modeCheck(1)">
                               <span>QQ钱包</span>
                               <!--ms-if-->
                               <i class="icon-corner-checked"></i>
                             </div>
-                            <div class="channel" :class="mode==2 && 'checked'" @click="mode=2">
+                            <div class="channel" :class="mode==2 && 'checked'" @click="modeCheck(2)">
                               <span>微信支付</span>
                               <i class="icon-corner-checked"></i>
                             </div>
@@ -94,28 +82,17 @@
                                 <i class="icon-more-arrow"></i>
                                 <i class="icon-corner-checked"></i>
                               </div>
-
-                              <!--ms-if-->
                               <div
                                   style="position: absolute; top: 0px; left: -70px; width: 100px; height: 50px; z-index: 3; background: white; opacity: 0; display: none;">
-
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="pay-area-body" style="position: relative; height: auto;padding-bottom: 40px">
+                        <div class="pay-area-body" style="position: relative; height: auto;padding-bottom: 15px">
                           <div style="width: 100%;" v-show="mode == 0">
                             <div class="channel-detail" style="display: none;"></div>
                             <div class="channel-detail">
                               <div avalonctrl="qb-controller">
-                                <!--<div class="left-money" id="qb_left_money_container">-->
-                                <!--<a class="query-left-money" href="javascript:;" ms-click="queryBalance">查询余额</a>-->
-                                <!--</div>-->
-
-                                <!--ms-if-->
-                                <!--ms-if-->
-                                <!--ms-if-->
-
                                 <div class="left-money-warn" v-show="payMoney > $store.state.role.money">
                                   <p>
                                     <i class="icon-error"></i>Q币余额不足
@@ -124,25 +101,20 @@
                                   <p class="tips sub-tips">还需<em>{{ payMoney - $store.state.role.money }}</em>Q币，请先去充值，或选择其他支付方式
                                   </p>
                                 </div>
-
-                                <div class="left-money" style="position: static"
-                                     v-show="payMoney <= $store.state.role.money">
-                                  <p class="tips sub-tips query-after">账户余额： <em>{{ $store.state.role.money }}</em> Q币<!--ms-if--></p>
+                                <div class="left-money" style="position: static" v-show="payMoney <= $store.state.role.money">
+                                  <p class="tips sub-tips query-after">账户余额： <em>{{ $store.state.role.money }}</em> Q币</p>
                                 </div>
-                                <!--ms-if-->
-
-                                <!-- 无法在跨域iframe里完成Q币支付的场景，引导跳出 -->
-                                <!--ms-if-->
-
                                 <div>
                                   <a v-show="payMoney > $store.state.role.money"
+                                     href="https://pay.qq.com/ipay/index.shtml?c=qqacct_save&ch=qqcard,qqwallet,weixin,kj&n=60&aid=pay.index.header.paycenter&ADTAG=pay.index.header.paycenter"
+                                     target="_blank"
                                      hidefocus="true"
                                      class="btn btn-default"
                                   >去充值</a>
                                   <a v-show="payMoney <= $store.state.role.money"
                                      class="btn btn-default"
                                      hidefocus="true"
-                                     @click="confirmPay"
+                                     @click="confirmPay(0)"
                                   >
                                       <span>
                                         <!--ms-if-->
@@ -161,20 +133,22 @@
                             <div class="channel-detail" style="display: none;"></div>
                             <div class="channel-detail">
                               <div avalonctrl="qqwallet-controller">
-                                <!--ms-if-->
                                 <div class="qr-code-txt">
                                   <i class="icon-qq"></i>手Q扫码，支付<em>{{ payMoney }}</em>元<!--ms-if-->
                                 </div>
                                 <div class="qr-code-area">
-                                  <div class="qr-code-container qq">
-                                    <div id="qr-code-qqwallet" style="display: none"></div>
-                                    <img
-                                        src="//pay.qq.com/cgi-bin/account/get_qr_image.cgi?size=120&amp;url=https%3A%2F%2Fapi.unipay.qq.com%2Fv1%2Fr%2F1450013294%2Fqrcode%3Fa%3Dl%26t%3D63dca47b-e533-a922-780e-dcb55defa2c7&amp;t=1675404411130&amp;orig=1">
-                                    <!--ms-if-->
-                                    <!--ms-if-->
-                                    <!--ms-if-->
+                                  <div class="qr-code-container qq" v-show="!maskShow">
+                                    <img src="//pay.qq.com/cgi-bin/account/get_qr_image.cgi?size=120&amp;url=https%3A%2F%2Fapi.unipay.qq.com%2Fv1%2Fr%2F1450013294%2Fqrcode%3Fa%3Dl%26t%3D63dca47b-e533-a922-780e-dcb55defa2c7&amp;t=1675404411130&amp;orig=1">
                                   </div>
-                                  <div class="qr-code-container qq" style="display: none;"></div>
+                                  <!--二维码加载start-->
+                                  <div class="qr-code-container qq" v-show="maskShow">
+                                    <div class="qr-code-mask"></div>
+                                    <div class="qr-code-loading">
+                                      <i></i>
+                                      <p>加载中，请稍后</p>
+                                    </div>
+                                  </div>
+                                  <!--二维码加载end-->
                                 </div>
                                 <div class="qr-code-area" style="display: none;">
                                   <i class="icon-phone"></i>
@@ -195,20 +169,23 @@
                             <div id="channelListWrap" class="channel-detail" style="display: none;"></div>
                             <div class="channel-detail">
                               <div avalonctrl="wechat-controller">
-                                <!--ms-if-->
                                 <div class="qr-code-txt">
                                   <i class="icon-wx"></i>微信扫码，支付<em>{{ payMoney }}</em>元
                                 </div>
                                 <div class="qr-code-area">
-                                  <div class="qr-code-container wx">
-                                    <div id="qr-code-wx" style="display: none"></div>
+                                  <div class="qr-code-container wx" v-show="!maskShow">
                                     <img
                                         src="//pay.qq.com/cgi-bin/account/get_qr_image.cgi?size=120&amp;url=weixin%3A%2F%2Fwxpay%2Fbizpayurl%3Fpr%3Dpk7eK8G39&amp;t=1675405467586&amp;orig=1">
-                                    <!--ms-if-->
-                                    <!--ms-if-->
-                                    <!--ms-if-->
                                   </div>
-                                  <div class="qr-code-container wx" style="display: none;"></div>
+                                  <!--二维码加载start-->
+                                  <div class="qr-code-container qq" v-show="maskShow">
+                                    <div class="qr-code-mask"></div>
+                                    <div class="qr-code-loading">
+                                      <i></i>
+                                      <p>加载中，请稍后</p>
+                                    </div>
+                                  </div>
+                                  <!--二维码加载end-->
                                 </div>
                                 <div class="qr-code-area" style="display: none;">
                                   <i class="icon-phone"></i>
@@ -231,6 +208,8 @@
                 </div>
               </div>
             </div>
+            <!--      订单界面end    -->
+
             <div id="subChannel" class="panel">
               <div avalonctrl="subChannel">
                 <div>
@@ -238,13 +217,29 @@
                 </div>
               </div>
             </div>
-            <div id="result" class="panel">
+            <!--      支付成功start      -->
+            <div id="result" class="panel" v-show="paySuccessFlag">
               <div avalonctrl="result">
-                <div>
-                  <div></div>
+                <div><div><div class="result-body result-success" style="padding-bottom:0; position: relative;" avalonctrl="result-detail">
+                  <div>
+                    <div class="icons-area">
+                      <i class="icon-success-l"></i>
+                    </div>
+                    <div class="info-area">
+                      <p>成功购买：支付订单 ×1</p>
+                    </div>
+                    <div class="marketing-area">
+                    </div>
+                    <div class="oper-area">
+                      <a href="#" class="btn btn-default" @click="confirmPay(1)">确定</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
+            <!--      支付成功end      -->
           </div>
           <div id="animation_mask" class="animation_mask"></div>
           <div id="animation_masktop" class="animation_masktop"></div>
@@ -255,7 +250,7 @@
           <input type="hidden" id="xMidasVersion" value="web_1.0.4">
           <input type="hidden" id="xMidasTicket"
                  value="7113547f15e2059c99ec4093328b60909337d38cb78f406ea8e8e1b321bbd4e0d5e5b01f37166fbfb933f53e341970f80544d9b7af9bfbc9ef9e24271500693b0b201417862668e652ebf27568a666f18e8570a0bf7c9ef4c915198646b1d417">
-          <div class="cp-body mdsweb-loading-wrapper" id="cp_loading_" style="display: none;">
+          <div class="cp-body mdsweb-loading-wrapper" id="cp_loading_" v-show="dotLoadingFlag">
             <div class="mdsweb-loading">
               <div class="dot"></div>
               <div class="dot"></div>
@@ -318,7 +313,17 @@
 import {defineProps, defineEmits, ref} from "vue";
 import {cancelShade} from "@/utils/shadeControler";
 
+window.addEventListener("keydown",e=>{
+  if(e.key=="p" && mode.value!= 0 && !maskShow.value) {
+    paySuccessFlag.value = true
+  }
+})
+
 const mode = ref(0)
+const paySuccessFlag = ref(false)
+const maskShow = ref(false)
+
+const emit = defineEmits(['close', "update"])
 defineProps({
   paymentShow: {
     type: Boolean,
@@ -326,14 +331,26 @@ defineProps({
   },
   payMoney: {type: Number, default: 0}
 })
-const emit = defineEmits(['close', "update"])
-const cancle = () => {
+
+const modeCheck = m => {
+  mode.value = m
+  maskShow.value = true
+  setTimeout(()=>{
+    maskShow.value = false
+  },500)
+}
+const reset = () => {
+  mode.value = 0
+  paySuccessFlag.value = false
+}
+const cancel = () => {
   cancelShade()
   emit('close')
 }
-const confirmPay = () => {
+const confirmPay = m => {
   cancelShade()
-  emit('update')
+  reset()
+  emit('update',m)
 }
 </script>
 
