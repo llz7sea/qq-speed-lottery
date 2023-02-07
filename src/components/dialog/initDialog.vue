@@ -101,6 +101,7 @@ const form = reactive({
   token: localStorage.getItem("token"),
   money: localStorage.getItem("money"),
   chances: localStorage.getItem("chances"),
+  version: store.state.currenVersion,
   dishPrizes: JSON.stringify(dishPrizesSortByValue),
   highLight: "[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]",
   alreadyWinPrize: "[]",

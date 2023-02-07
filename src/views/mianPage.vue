@@ -20,18 +20,24 @@ window['consoleShow'] = false
 const consoleShow = ref(false)
 const initShow = ref(!store.state.registered)
 
-if(store.state.registered) {
-  window.addEventListener('keydown',e=>{
-    if(e.key == "Home") {
+if (store.state.registered) {
+  window.addEventListener('keydown', e => {
+    if (e.key == "Home") {
       initShow.value = !initShow.value
     }
   })
-  window.addEventListener('keydown',e=>{
-    console.log(e)
-    if(e.key == "Insert") {
+  window.addEventListener('keydown', e => {
+    if (e.key == "Insert") {
       consoleShow.value = !consoleShow.value
     }
   })
+  if (!localStorage.getItem("version") || store.state.version != store.state.currenVersion) {
+    console.log(localStorage.getItem("version"))
+    console.log(store.state.version)
+    console.log(store.state.currenVersion)
+    localStorage.clear()
+    location.reload()
+  }
 }
 </script>
 

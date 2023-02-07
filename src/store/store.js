@@ -26,7 +26,9 @@ export default createStore({
             dishPrizes: JSON.parse(localStorage.getItem("dishPrizes"))
         },
         tokens: ["1"],
-        lotteryResult: ""
+        lotteryResult: "",
+        version: localStorage.getItem("version"),
+        currenVersion: "1.0.0"
     },
     mutations: {
         regist(state, payload) {

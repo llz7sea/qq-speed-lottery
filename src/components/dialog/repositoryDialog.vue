@@ -66,7 +66,7 @@ watch(() => props.visible, () => {
     })
   })
   console.log(repository.value)
-  pageSize.value = Math.ceil(repository.value.length / 7)
+  pageSize.value = Math.ceil(repository.value.length / 7) || 1
   currentPageData.value = Array.from(repository.value).slice(0, 7)
 })
 
