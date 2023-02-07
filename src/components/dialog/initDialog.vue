@@ -36,6 +36,7 @@ import {callShade} from "@/utils/shadeControler";
 import {defineEmits, defineProps, reactive, ref} from "vue";
 import {useStore} from "vuex";
 import {regions} from "@/enums/region"
+import {dishPrizesSortByValue} from "@/enums/prizes";
 
 defineProps({visible: {type: Boolean, default: false}})
 const registered = localStorage.getItem("registered")
@@ -100,7 +101,9 @@ const form = reactive({
   token: localStorage.getItem("token"),
   money: localStorage.getItem("money"),
   chances: localStorage.getItem("chances"),
+  dishPrizes: JSON.stringify(dishPrizesSortByValue),
   highLight: "[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]",
+  alreadyWinPrize: "[]",
   repository: "[]",
   rollDishChances: 0,
   blessValue: 0,

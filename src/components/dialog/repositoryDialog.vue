@@ -25,8 +25,8 @@
         <tr v-for="(item,index) in currentPageData" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ $store.state.role.region }}</td>
-          <td>{{ prizes[item].name }}</td>
-          <td>{{ prizes[item].time }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.time }}</td>
           <td><a class="sp db btn_pop10_lq" @click="getPrize">领取</a></td>
           <td><a class="sp db btn_pop10_fj" @click="resolve">分解</a></td>
         </tr>
@@ -60,7 +60,12 @@ const pageSize = ref(1)
 
 watch(() => props.visible, () => {
   pageNum.value = 1
-  repository.value = store.state.role.repository
+  repository.value = store.state.role.repository.map(code=>{
+    return prizes.find(p=>{
+      return p.code == code
+    })
+  })
+  console.log(repository.value)
   pageSize.value = Math.ceil(repository.value.length / 7)
   currentPageData.value = Array.from(repository.value).slice(0, 7)
 })

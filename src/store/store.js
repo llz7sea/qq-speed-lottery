@@ -21,7 +21,9 @@ export default createStore({
             highLight: JSON.parse(localStorage.getItem("highLight")),
             blessValue: Number(localStorage.getItem("blessValue")),
             blessTotal: Number(localStorage.getItem("blessTotal")),
-            repository: JSON.parse(localStorage.getItem("repository"))
+            repository: JSON.parse(localStorage.getItem("repository")),
+            alreadyWinPrize: JSON.parse((localStorage.getItem("alreadyWinPrize"))),
+            dishPrizes: JSON.parse(localStorage.getItem("dishPrizes"))
         },
         tokens: ["1"],
         lotteryResult: ""
@@ -71,8 +73,6 @@ export default createStore({
             localStorage.setItem("money", state.role.money)
         },
         lottery(state, payload) {
-            // 抽奖逻辑 start
-
             // 初始化
             let q = payload // 参数为抽奖次数
             state.role.chances -= q
@@ -94,56 +94,58 @@ export default createStore({
                         return p.code == chosenPrizes[0]
                     })
                     window.chosenPrizes.shift()
-                }// 点亮逻辑 start
-                if (nextPrize.type == "s"|| nextPrize.name.includes("永久")) {
+                }
+                if (nextPrize.type == "s" || nextPrize.name.includes("永久")) {
                     state.role.repository.push(nextPrize.code)
-                    localStorage.setItem("repository",  JSON.stringify(state.role.repository))
+                    localStorage.setItem("repository", JSON.stringify(state.role.repository))
                 }
                 resultArr.push(nextPrize)
 
-                let x = nextPrize.position[0]
-                let y = nextPrize.position[1]
-                if (state.role.highLight[x][y] == 0) {
-                    let value_index = countNum.indexOf(state.role.blessTotal)
-                    state.role.highLight[x][y] = 1
-                    state.role.blessValue = 0
-                    state.role.blessTotal = countNum[value_index + 1]
-                }
-
-                if (state.role.highLight[x][y] == 1) {
-                    state.role.blessValue += 1
-                    // 如果这次抽奖 充满了祝福值
-                    if (state.role.blessValue == state.role.blessTotal) {
-                        // 获取未点亮的奖品坐标列表
-                        let unLightUpPosition = []
-                        let unLightUpCode = []
-                        state.role.highLight.forEach((x, xIndex) => {
-                            x.forEach((y, yIndex) => {
-                                if (y == 0) {
-                                    unLightUpPosition.push(xIndex.toString() + yIndex.toString())
+                // 高亮逻辑 start
+                if (nextPrize.position) {
+                    let x = nextPrize.position[0]
+                    let y = nextPrize.position[1]
+                    if (state.role.highLight[x][y] == 0) {
+                        let value_index = countNum.indexOf(state.role.blessTotal)
+                        state.role.highLight[x][y] = 1
+                        state.role.blessValue = 0
+                        state.role.blessTotal = countNum[value_index + 1]
+                    }
+                    if (state.role.highLight[x][y] == 1) {
+                        state.role.blessValue += 1
+                        // 如果这次抽奖 充满了祝福值
+                        if (state.role.blessValue == state.role.blessTotal) {
+                            // 获取未点亮的奖品坐标列表
+                            let unLightUpPosition = []
+                            let unLightUpCode = []
+                            state.role.highLight.forEach((x, xIndex) => {
+                                x.forEach((y, yIndex) => {
+                                    if (y == 0) {
+                                        unLightUpPosition.push(xIndex.toString() + yIndex.toString())
+                                    }
+                                })
+                            })
+                            // 根据位置坐标数组获得奖品的code数组
+                            prizes.forEach(p => {
+                                if (p.position) {
+                                    let positionStr = p.position[0].toString() + p.position[1].toString()
+                                    // 如果位置未点亮 并且在祝福值奖池内
+                                    if (unLightUpPosition.includes(positionStr) && prizesCodeSortByValue.includes(p.code)) {
+                                        unLightUpCode.push(p.code)
+                                    }
                                 }
                             })
-                        })
-                        // 根据位置坐标数组获得奖品的code数组
-                        prizes.forEach(p => {
-                            if (p.position) {
-                                let positionStr = p.position[0].toString() + p.position[1].toString()
-                                // 如果位置未点亮 并且在祝福值奖池内
-                                if (unLightUpPosition.includes(positionStr) && prizesCodeSortByValue.includes(p.code)) {
-                                    unLightUpCode.push(p.code)
-                                }
-                            }
-                        })
-                        // 从中选出优先级最低的一个
-                        unLightUpCode.sort((a, b) => {
-                            return prizesCodeSortByValue.indexOf(a) - prizesCodeSortByValue.indexOf(b)
-                        })
-                        console.log(unLightUpCode)
-                        // 则为下次抽奖注入未点亮的奖品
-                        window.chosenPrizes.push(unLightUpCode[0])
-                        console.log(window.chosenPrizes)
+                            // 从中选出优先级最低的一个
+                            unLightUpCode.sort((a, b) => {
+                                return prizesCodeSortByValue.indexOf(a) - prizesCodeSortByValue.indexOf(b)
+                            })
+                            // 则为下次抽奖注入未点亮的奖品
+                            window.chosenPrizes.push(unLightUpCode[0])
+                            console.log(window.chosenPrizes)
+                        }
                     }
                 }
+                // 高亮逻辑 end
             }
             // lottery end
 
@@ -171,11 +173,22 @@ export default createStore({
             localStorage.setItem("highLight", JSON.stringify(state.role.highLight))
             localStorage.setItem("blessValue", state.role.blessValue)
             localStorage.setItem("blessTotal", state.role.blessTotal)
+            localStorage.setItem("chances", state.role.chances)
             bus.emit("updatePrize")
         },
         addRollDishChance(state) {
-            state.role.rollDishChances += 1
+            state.role.rollDishChances ++
             localStorage.setItem("rollDishChances", state.role.rollDishChances)
+        },
+        rollDish(state) {
+            state.role.rollDishChances--
+            state.role.repository.push(state.role.dishPrizes[0])
+            state.role.alreadyWinPrize.push(state.role.dishPrizes.shift())
+            localStorage.setItem("repository", JSON.stringify(state.role.repository))
+            localStorage.setItem("rollDishChances", state.role.rollDishChances)
+            localStorage.setItem("alreadyWinPrize", JSON.stringify(state.role.alreadyWinPrize))
+            localStorage.setItem("dishPrizes", JSON.stringify(state.role.dishPrizes))
+
         }
     }
 })

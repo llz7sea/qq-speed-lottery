@@ -163,53 +163,77 @@
             <br>每次转动可随机获得一个永久奖励，已经获得的永久奖励不会重复获得。</p>
           <div id="lotterycontent" class="lottery">
             <ul class="list_lo">
-              <li id="show0"><!--添加ed类已获得-->
+              <li id="show0"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(26) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop1.png">
                 <em class="sp"><b>S</b></em>
                 <p>终极烈焰新星<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 26"></span>
               </li>
-              <li id="show1"><!--添加ed类已获得-->
+              <li id="show1"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(27) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop2.png">
                 <em class="sp"><b>T1</b></em>
                 <p>至尊青龙 <br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 27"></span>
               </li>
-              <li id="show2"><!--添加ed类已获得-->
+              <li id="show2"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(28) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop3.png">
                 <em class="sp"><b>座椅</b></em>
                 <p>恭贺新春座椅<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 28"></span>
               </li>
-              <li id="show3"><!--添加ed类已获得-->
+              <li id="show3"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(29) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop4.png">
                 <em class="sp"><b>宠物</b></em>
                 <p>傲世青龙<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 29"></span>
               </li>
-              <li id="show4"><!--添加ed类已获得-->
+              <li id="show4"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(30) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop5.png">
                 <em class="sp"><b>羽翼</b></em>
                 <p>浮华星海背饰<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 30"></span>
               </li>
-              <li id="show5"><!--添加ed类已获得-->
+              <li id="show5"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(31) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop6.png">
                 <em class="sp"><b>发饰</b></em>
                 <p>天光云影发饰<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 31"></span>
               </li>
-              <li id="show6"><!--添加ed类已获得-->
+              <li id="show6"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(32) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop7.png">
                 <em class="sp"><b>服饰</b></em>
                 <p>天光云影服饰<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 32"></span>
               </li>
-              <li id="show7"><!--添加ed类已获得-->
+              <li id="show7"
+                  :class="$store.state.role.alreadyWinPrize && $store.state.role.alreadyWinPrize.includes(33) && 'ed'">
+                <!--添加ed类已获得-->
                 <img src="//game.gtimg.cn/images/speed/cp/a20221223jpk/s2_prop8.png">
                 <em class="sp"><b>手杖</b></em>
                 <p>暮色蔷薇手杖<br>(永久)</p>
                 <i></i>
+                <span class="box_zz pa" v-show="dishHighLight == 33"></span>
               </li>
             </ul>
             <a class="pa btn_cj"
@@ -237,9 +261,9 @@
           <p>5、车王赛车图鉴获得的可分解奖励存放在暂存箱中，玩家可在活动期间自行选择领取或分解奖励。</p>
           <p>6、由于篇幅限制，本活动概率公示将会在新闻概率公示页面中发布。<a
               href="javascript:location.href='https://speed.qq.com/webplat/info/news_version3/147/534/552/553/m15538/201801/684484.shtml';"
-              >点击查看</a></p>
+          >点击查看</a></p>
           <p>7、关于“永久”的定义，请见<a href="javascript:"
-                              >《腾讯游戏许可及服务协议》</a>第4.8条。
+          >《腾讯游戏许可及服务协议》</a>第4.8条。
           </p>
         </div>
       </div>
@@ -338,6 +362,8 @@ const repositoryShow = ref(false)
 
 const resultData = reactive({current: 0})
 const payMoney = ref(2)
+const dishHighLight = ref(0)
+const highLightOrder = [26,27,28,29,30,31,32,33]
 
 const checkLogin = () => {
   if (!store.state.logined) {
@@ -418,8 +444,32 @@ const openRepository = () => {
 const rollDish = () => {
   checkLogin()
   if (store.state.logined) {
-    callShade("grey")
-    cantRollShow.value = true
+    if (store.state.role.rollDishChances == 0) {
+      console.log(store.state.role.rollDishChances)
+      callShade("grey")
+      cantRollShow.value = true
+      return
+    }
+    let interval = null
+    new Promise(resolve => {
+      let currentHighLightIndex = 0
+      dishHighLight.value = highLightOrder[0]
+      interval = setInterval(() => {
+        if (highLightOrder.length == currentHighLightIndex - 1) {
+          currentHighLightIndex = -1
+        }
+        currentHighLightIndex++
+        dishHighLight.value = highLightOrder[currentHighLightIndex]
+      }, 100)
+      setTimeout(()=>{
+        resolve()
+      },2000)
+    }).then(() => {
+      dishHighLight.value = 0
+      clearInterval(interval)
+      interval = null
+      store.commit('rollDish')
+    })
   }
 }
 </script>

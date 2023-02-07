@@ -34,3 +34,4 @@ export const prizes = [
     {code: 33, value: 0, time: "永久", name: '暮色蔷薇手杖（永久）', type: "s"}
 ]
 export const prizesCodeSortByValue = [22, 23, 24, 25, 19, 21, 15, 17, 11, 13, 18, 20, 14, 16, 10, 12]
+export const dishPrizesSortByValue = [33, 31, 30, 32, 28, 29, 27, 26]
